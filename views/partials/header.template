@@ -1,0 +1,11 @@
+<nav class="top-bar" data-topbar role="navigation">
+	<ul class="inline-list" id="global-nav">
+		<li>
+			<a href="/listar-filmes">Ver Filmes</a>
+		</li>
+
+		<li>
+			<a href="/cadastrar-filme">Cadastrar Filme</a>
+		</li>
+	</ul>
+</nav>

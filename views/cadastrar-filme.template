@@ -1,0 +1,42 @@
+{> layout /}
+
+{<title} {pageTitle} {/title}
+
+{<main}
+	<form id="movie-form">
+		<div class="row">
+			<div class="large-12 columns">
+				<label for="title">Título:</label> <input type="text" name="title" id="title" />
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="large-6 columns">
+				<label for="rating">Classificação:</label> 
+				<select name="rating" id="rating">
+					<option value="free">Livre</option>
+					<option value="PG-13">PG-13</option>
+					<option value="PG-17">PG-17</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="large-6 columns">
+				<label for="releaseYear">Ano de lançamento:</label>
+				<input type="number" name="releaseYear" id="releaseYear" />
+			</div> 
+		</div>
+
+		<div class="row">
+			<div class="large-6 columns">
+				<input type="submit" value="Cadastrar" />	
+			</div>
+		</div>	
+	</form>
+
+{/main}	
+
+{<scripts}
+	<script src="/javascripts/cadastrarFilme.js"></script>
+{/scripts}	

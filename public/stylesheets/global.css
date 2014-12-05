@@ -1,0 +1,26 @@
+#main {
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+#global-nav {
+	padding: 10px 20px;
+}
+
+#movie-form {
+	max-width: 600px;
+}
+
+.delete-film { 
+	font-size: 12px; 
+	color: #F00;
+}
+
+.delete-film:hover {
+	text-decoration: underline;
+	cursor:pointer;
+}
+
+#search-container {
+	margin-left: 0;
+}
