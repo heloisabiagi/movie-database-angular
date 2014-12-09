@@ -1,6 +1,6 @@
 module.exports = function(app) {  
   
-  var application = require("../mongo/mongo")();   
+  var application = require("../mongo/movieSchema")();   
 
   var routes = {    
   	 get: function(req, res, next) {

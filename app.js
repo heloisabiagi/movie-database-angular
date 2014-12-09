@@ -15,9 +15,11 @@ app.engine('template', kleiDust.dust);
 app.set('view engine', 'template');
 app.set('view options', {layout: false});
 
+//Mongo
+var mongodb = require("./mongo/mongo.js")(app); 
+
 // Sockets
 app.set("port", 3000);
-
 var movieEvents = require('./sockets/MovieEvents.js')(app);
 
 
