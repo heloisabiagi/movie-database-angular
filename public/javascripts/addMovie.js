@@ -1,6 +1,6 @@
-MV.cadastrar = (function() {
+MDB.addMovie = (function() {
 
-	function postFilm(form) {
+	function postMovie(form) {
 		var movie = {};
 
 		var form = form;
@@ -22,7 +22,7 @@ MV.cadastrar = (function() {
 				resetForm();
 			}
 		}).done(function(){
-			MV.socket.emit('refresh list', 'catálogo atualizado');
+			MDB.socket.emit('refresh list', 'catálogo atualizado');
 		});
 
 	}
@@ -39,10 +39,10 @@ MV.cadastrar = (function() {
 			e.preventDefault();
 
 			var form = $(this);
-			postFilm(form);
+			postMovie(form);
 		});
 
-		MV.socket.on('refresh list', function(msg){
+		MDB.socket.on('refresh list', function(msg){
 			console.log(msg);
   		});
 
@@ -55,4 +55,4 @@ MV.cadastrar = (function() {
 	}
 })();
 
-MV.cadastrar.init();
+MDB.addMovie.init();

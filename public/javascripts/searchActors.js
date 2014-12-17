@@ -1,25 +1,25 @@
-MV.buscar = (function() {
+MDB.searchActors = (function() {
 
-	function searchFilm(term) {
+	function searchActorService(term) {
 
 		var term = term || $("#search-box").val();
 
 		$.ajax({
-			url: "/ws/film/search?term=" + term,
+			url: "/ws/actor/search?term=" + term,
 			method: "GET",
 			contentType: "application/json",
 			dataType: "json",
 			success: function(data) {
-				var filmList = "";
+				var actorsList = "";
 
 				$.each(data, function(index, item) {
-					if(item["title"]) {
-						filmList += "<li data-id='" + item["_id"]+ "'><strong>" + item["title"]+ "</strong> - " + item["releaseYear"]+" <span class='delete-film'>Excluir</span></li>";
+					if(item["name"]) {
+						actorsList += "<li data-id='" + item["_id"]+ "'><strong>" + item["name"]+ "</strong> - " + item["placeOfBirth"]+" <span class='delete-film'>Excluir</span></li>";
 					}
 				});
 
-				$("#film-list").html(filmList);
-				MV.listar.deleteFilm();
+				$("#actors-list").html(actorsList);
+				MDB.listActors.deleteActor();
 			}
 		});
 
@@ -33,12 +33,12 @@ MV.buscar = (function() {
 	function bindEvents() {
 		$("#search-form").on("submit", function(e){
 			e.preventDefault();
-			searchFilm();
+			searchActorService();
 		});
 
 		$("#search-box").on("keyup", function(){
 			var term = $(this).val();
-			searchFilm(term);
+			searchActorService(term);
 		});
 
 	}
@@ -51,4 +51,4 @@ MV.buscar = (function() {
 
 })();
 
-MV.buscar.init();
+MDB.searchActors.init();

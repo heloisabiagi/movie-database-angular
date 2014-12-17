@@ -17,11 +17,11 @@
 		</form>
 	</div>
 	
-	<ul id="film-list">
+	<ul id="actors-list">
 	</ul>
 {/main}	
 
 {<scripts}
-	<script src="/javascripts/listMovies.js"></script>
-	<script src="/javascripts/searchMovie.js"></script>
+	<script src="/javascripts/listActors.js"></script>
+	<script src="/javascripts/searchActors.js"></script>
 {/scripts}	

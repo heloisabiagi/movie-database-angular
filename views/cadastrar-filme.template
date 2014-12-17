@@ -38,5 +38,5 @@
 {/main}	
 
 {<scripts}
-	<script src="/javascripts/cadastrarFilme.js"></script>
+	<script src="/javascripts/addMovie.js"></script>
 {/scripts}	

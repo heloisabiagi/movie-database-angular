@@ -1,6 +1,6 @@
-MV.listar = (function() {
+MDB.listMovies = (function() {
 
-	function getFilmsList() {
+	function getMoviesList() {
 
 		$.ajax({
 			url: "/ws/film",
@@ -12,18 +12,18 @@ MV.listar = (function() {
 
 				$.each(data, function(index, item) {
 					if(item["title"]) {
-						filmList += "<li data-id='" + item["_id"]+ "'><strong>" + item["title"]+ "</strong> - " + item["releaseYear"]+" <span class='delete-film'>Excluir</span></li>";
+						filmList += "<li data-id='" + item["_id"]+ "'><strong>" + item["title"]+ "</strong> - " + item["releaseYear"]+" <span class='delete-span delete-film'>Excluir</span></li>";
 					}
 				});
 
 				$("#film-list").html(filmList);
-				MV.listar.deleteFilm();
+				MDB.listMovies.deleteMovie();
 			}
 		});
 
 	}
 
-	function deleteFilm(el){
+	function deleteMovie(el){
 		var id = el.parent().attr("data-id");
 
 		$.ajax({
@@ -33,7 +33,7 @@ MV.listar = (function() {
 			dataType: "json",
 			success: function(data) {
 				alert("Filme excluído com sucesso");
-				MV.socket.emit('refresh list', 'catálogo atualizado');
+				MDB.socket.emit('refresh list', 'catálogo atualizado');
 			}
 		});
 
@@ -41,23 +41,23 @@ MV.listar = (function() {
 
 	return {
 		init: function(){
-			getFilmsList();
+			getMoviesList();
 			this.events();
 		},
 		events: function() {
-			MV.socket.on('refresh list', function(msg){
-				getFilmsList();
+			MDB.socket.on('refresh list', function(msg){
+				getMoviesList();
   			});
 
-			this.deleteFilm();
+			this.deleteMovie();
 		},
-		deleteFilm: function() {
+		deleteMovie: function() {
 			$(".delete-film").on("click", function(){
 				var el = $(this);
-				deleteFilm(el);
+				deleteMovie(el);
 			});
 		}
 	}
 })();
 
-MV.listar.init();
+MDB.listMovies.init();

@@ -33,18 +33,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // WS
 var movies = require('./controllers/MovieController.js')(app);
+var actors = require('./controllers/ActorController.js')(app);
 
 // SET ROUTES
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var cadastrarFilme = require('./routes/cadastrarFilme');
-var listarFilme = require('./routes/listarFilme');
+var cadastrarFilme = require('./routes/addMovie');
+var listarFilme = require('./routes/listMovies');
+var cadastrarAtor = require('./routes/addActor');
+var listarAtor = require('./routes/listActors');
 
 // ROUTES
 app.use('/', routes);
 app.use('/users', users);
 app.use('/cadastrar-filme', cadastrarFilme);
 app.use('/listar-filmes', listarFilme);
+app.use('/cadastrar-ator', cadastrarAtor);
+app.use('/listar-atores', listarAtor);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

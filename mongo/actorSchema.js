@@ -3,15 +3,13 @@ module.exports = function(app) {
 	var Mongoose = require('Mongoose');
 
 	var actorSchema = new Mongoose.Schema({
-	  name: { 
-	  	first: { type: String},
-	  	last: { type: String } 
-	  },
+	  name: { type: String },
 	  dateOfBirth: { type: Date },
-	  placeOfBirth: { type: String }
+	  placeOfBirth: { type: String },
+	  filmography: { type: Array }
 	});
 
-	var Actor = Mongoose.model('Actor', movieSchema);
+	var Actor = Mongoose.model('Actor', actorSchema);
 
 	var methods = {
 		getList : function(callback) {
@@ -43,7 +41,7 @@ module.exports = function(app) {
 		      });
 
 	      } else {
-		      	Actor.find({ title: new RegExp(term, "gi") })
+		      	Actor.find({ name: new RegExp(term, "gi") })
 		      .exec(function (err, result) {
 		        callback(err, result || []);
 		      });

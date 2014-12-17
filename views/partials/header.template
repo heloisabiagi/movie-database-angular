@@ -5,7 +5,14 @@
 		</li>
 
 		<li>
+			<a href="/listar-atores">Ver Atores</a>
+		</li>
+
+		<li>
 			<a href="/cadastrar-filme">Cadastrar Filme</a>
+		</li>
+		<li>
+			<a href="/cadastrar-ator">Cadastrar Ator</a>
 		</li>
 	</ul>
 </nav>
