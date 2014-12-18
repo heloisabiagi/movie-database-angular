@@ -10,6 +10,14 @@ MDB.addActor = (function() {
 		actor.name = form.find("#name").val();
 		actor.dateOfBirth = new Date(formattedDate);
 		actor.placeOfBirth = form.find("#placeOfBirth").val();
+		actor.filmography = [];
+
+		$(".filmography").each(function(){
+			var movie = $(this).val();
+			if(movie !== "") {
+				actor.filmography.push(movie);
+			}
+		});
 
 		var myData = JSON.stringify(actor);
 
@@ -32,6 +40,7 @@ MDB.addActor = (function() {
 		form.find("#name").val("");
 		form.find("#dateOfBirth").val("");
 		form.find("#placeOfBirth").val("");
+		$(".filmography").val("");
 	}
 
 	function bindEvents() {

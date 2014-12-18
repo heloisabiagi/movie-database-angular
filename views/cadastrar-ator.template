@@ -25,6 +25,15 @@
 
 		<div class="row">
 			<div class="large-6 columns">
+				<label for="filmography">Filmes:</label> 
+				<input type="text" name="filmography1" id="filmography1" class="filmography" />
+				<input type="text" name="filmography2" id="filmography2" class="filmography" />
+				<input type="text" name="filmography3" id="filmography3" class="filmography" />
+			</div> 
+		</div>
+
+		<div class="row">
+			<div class="large-6 columns">
 				<input type="submit" value="Cadastrar" />	
 			</div>
 		</div>	

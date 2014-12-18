@@ -6,7 +6,7 @@ module.exports = function(app) {
 	  name: { type: String },
 	  dateOfBirth: { type: Date },
 	  placeOfBirth: { type: String },
-	  filmography: { type: Array }
+	  filmography: [{ type: Mongoose.Schema.Types.ObjectId, ref: 'Movie'}]
 	});
 
 	var Actor = Mongoose.model('Actor', actorSchema);
@@ -18,7 +18,27 @@ module.exports = function(app) {
 	        callback(err, result || []);
 	      });
 	    },
+	    get : function(id, callback) {
+	      if(!id) return callback(null, {});
+
+	      Actor.findById(id)
+	      .populate('filmography', 'title releaseYear')
+	      .exec(function (err, result) {
+	        callback(err, result || {});
+	      });
+	    },
 		new : function(data, callback) {
+		  var newFilmography = [];
+
+		  for(i=0; i < data.filmography.length; i++) {
+		  	var objId = data.filmography[i];
+		  	var item = Mongoose.Types.ObjectId(objId);
+
+		  	newFilmography.push(item);
+		  }
+
+		  data.filmography = newFilmography;
+
 	      var actor = new Actor(data);
 
 	      actor.save(function (err, result) {

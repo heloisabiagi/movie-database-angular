@@ -6,7 +6,8 @@ module.exports = function(app) {
 	  title: { type: String },
 	  rating: String,
 	  releaseYear: Number,
-	  hasCreditCookie: Boolean
+	  hasCreditCookie: Boolean,
+	  cast: [{ type: Mongoose.Schema.Types.ObjectId, ref: 'Actor'}]
 	});
 
 	var Movie = Mongoose.model('Movie', movieSchema);
@@ -18,7 +19,27 @@ module.exports = function(app) {
 	        callback(err, result || []);
 	      });
 	    },
+	    get : function(id, callback) {
+	      if(!id) return callback(null, {});
+
+	      Movie.findById(id)
+	      .populate('cast', 'name')
+	      .exec(function (err, result) {
+	        callback(err, result || {});
+	      });
+	    },
 		new : function(data, callback) {
+		  var newCast = [];
+
+		  for(i=0; i < data.cast.length; i++) {
+		  	var objId = data.cast[i];
+		  	var item = Mongoose.Types.ObjectId(objId);
+
+		  	newCast.push(item);
+		  }
+
+		  data.cast = newCast;
+		  	
 	      var movie = new Movie(data);
 
 	      movie.save(function (err, result) {

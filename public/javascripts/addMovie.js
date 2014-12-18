@@ -8,6 +8,14 @@ MDB.addMovie = (function() {
 		movie.rating = form.find("#rating").val();
 		movie.releaseYear = form.find("#releaseYear").val();
 		movie.hasCreditCookie = false;
+		movie.cast = [];
+
+		$(".cast").each(function(){
+			var actor = $(this).val();
+			if(actor !== "") {
+				movie.cast.push(actor);
+			}
+		});
 
 		var myData = JSON.stringify(movie);
 
@@ -32,6 +40,7 @@ MDB.addMovie = (function() {
 		form.find("#title").val("");
 		form.find("#rating").val("free");
 		form.find("#releaseYear").val("");
+		$(".cast").val("");
 	}
 
 	function bindEvents() {

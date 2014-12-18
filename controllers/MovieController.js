@@ -4,12 +4,17 @@ module.exports = function(app) {
 
   var routes = {    
   	 get: function(req, res, next) {
+      if(req.params.id) {
+        return application.get(req.params.id, function(err, result) {
+          if(err) return res.json(500, err);
+          res.json(result || {});
+        });
+      }
       return application.getList(function(err, result) {
         if(err) return res.json(500, err);
         res.send(result);
       });
     },
-
     post: function(req, res, next) {
        application.new(req.body, function(err, result) {
 
@@ -42,6 +47,7 @@ module.exports = function(app) {
   .post(routes.post);
 
   app.route('/ws/film/:id')
+  .get(routes.get)
   .delete(routes.delete);
 
   app.route('/ws/film/search')

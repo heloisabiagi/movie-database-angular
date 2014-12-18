@@ -30,6 +30,15 @@
 
 		<div class="row">
 			<div class="large-6 columns">
+				<label for="cast">Elenco:</label> 
+				<input type="text" name="cast1" id="cast1" class="cast" />
+				<input type="text" name="cast2" id="cast2" class="cast" />
+				<input type="text" name="cast3" id="cast3" class="cast" />
+			</div> 
+		</div>
+
+		<div class="row">
+			<div class="large-6 columns">
 				<input type="submit" value="Cadastrar" />	
 			</div>
 		</div>	
