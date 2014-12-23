@@ -1,18 +1,18 @@
 <nav class="top-bar" data-topbar role="navigation">
 	<ul class="inline-list" id="global-nav">
 		<li>
-			<a href="/listar-filmes">Ver Filmes</a>
+			<a href="/filme/listar">Ver Filmes</a>
 		</li>
 
 		<li>
-			<a href="/listar-atores">Ver Atores</a>
+			<a href="/ator/listar">Ver Atores</a>
 		</li>
 
 		<li>
-			<a href="/cadastrar-filme">Cadastrar Filme</a>
+			<a href="/filme/cadastrar">Cadastrar Filme</a>
 		</li>
 		<li>
-			<a href="/cadastrar-ator">Cadastrar Ator</a>
+			<a href="/filme/listar">Cadastrar Ator</a>
 		</li>
 	</ul>
 </nav>

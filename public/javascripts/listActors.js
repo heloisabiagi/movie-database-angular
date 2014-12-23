@@ -12,7 +12,7 @@ MDB.listActors = (function() {
 
 				$.each(data, function(index, item) {
 					if(item["name"]) {
-						actorsList += "<li data-id='" + item["_id"]+ "'><strong>" + item["name"]+ "</strong> - " + item["placeOfBirth"]+" <span class='delete-span delete-actor'>Excluir</span></li>";
+						actorsList += "<li data-id='" + item["_id"]+ "'><strong>" + item["name"]+ "</strong> - " + item["placeOfBirth"]+" <a class='see-more' href='/ator/" + item["_id"] + "'>Detalhes</a> <span class='delete-span delete-actor'>Excluir</span> </li>";
 					}
 				});
 

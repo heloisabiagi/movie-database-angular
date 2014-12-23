@@ -24,6 +24,14 @@ module.exports = function(app) {
       });
     },
 
+    put: function(req, res, next) {
+      application.update(req.body._id, req.body, function(err, result) {
+
+        if(err) return res.json(500, err);
+        res.json(result || {});
+      });
+    },
+
     delete: function(req, res, next) {
      application.remove(req.params.id, function(err, result) {
         if(err) return res.json(500, err);
@@ -48,6 +56,7 @@ module.exports = function(app) {
   .post(routes.post);
 
   app.route('/ws/actor/:id')
+  .put(routes.put)
   .get(routes.get)
   .delete(routes.delete);
 

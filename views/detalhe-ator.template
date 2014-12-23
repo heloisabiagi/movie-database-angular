@@ -1,0 +1,23 @@
+{>layout /}
+
+{<title}{pageTitle}{/title}
+
+{<main}
+	<div class="row">
+		<dl id="show-actor">
+		</dl>
+	</div>
+
+	<div class="row form-buttons">
+		<div class="large-6 columns">
+			<button class="edit-actor"> Editar </button>	
+		</div>
+	</div>	
+{/main}	
+
+{<scripts}
+	{!}
+	<script src="/javascripts/listActors.js"></script>
+	{!}
+	<script src="/javascripts/showActor.js"></script>
+{/scripts}	

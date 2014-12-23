@@ -16,6 +16,16 @@
 	color: #F00;
 }
 
+.see-more { 
+	font-size: 12px; 
+	color: #028532;
+}
+
+.see-more:hover {
+	color: #028532;
+	text-decoration: underline;
+}
+
 .delete-span:hover {
 	text-decoration: underline;
 	cursor:pointer;

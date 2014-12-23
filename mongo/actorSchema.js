@@ -66,6 +66,18 @@ module.exports = function(app) {
 		        callback(err, result || []);
 		      });
 	  	  }
+	    },
+
+	    update : function(id, data, callback) {
+	      if(!id) return callback({});
+
+	      delete data._id;
+	      delete data.created_at;
+	      data.modified_at = new Date();
+
+	      Actor.findByIdAndUpdate(id, { $set: data }, function (err, result) {
+	        callback(err, result || {});
+	      });
 	    }
 	}
 
