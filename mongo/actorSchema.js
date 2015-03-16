@@ -67,7 +67,6 @@ module.exports = function(app) {
 		      });
 	  	  }
 	    },
-
 	    update : function(id, data, callback) {
 	      if(!id) return callback({});
 
@@ -81,6 +80,10 @@ module.exports = function(app) {
 	    }
 	}
 
-	return methods;
+	var Public = {};
+	Public.Actor = Actor;
+	Public.methods = methods;
+
+	return Public;
 
 }

@@ -14,7 +14,7 @@ MDB.searchMovie = (function() {
 
 				$.each(data, function(index, item) {
 					if(item["title"]) {
-						filmList += "<li data-id='" + item["_id"]+ "'><strong>" + item["title"]+ "</strong> - " + item["releaseYear"]+" <span class='delete-film'>Excluir</span></li>";
+						filmList += "<li data-id='" + item["_id"]+ "'><a href='/filme/" + item["_id"] + "'> <strong>" + item["title"]+ "</strong> </a> - " + item["releaseYear"]+" <span class='delete-span delete-film'>Excluir</span></li>";
 					}
 				});
 

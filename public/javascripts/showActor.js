@@ -4,7 +4,7 @@ MDB.showActor = (function() {
 
 		var actorId = location.pathname.split("/").pop();
 		$.ajax({
-			url: "/ws/actor/" + actorId,
+			url: "/ws/actor/show/" + actorId,
 			method: "GET",
 			contentType: "application/json",
 			dataType: "json",
@@ -33,7 +33,7 @@ MDB.showActor = (function() {
 				actorInfo += "<dd id='filmography'><ul class='filmography'>";
 
 					$.each(data.filmography, function(index, item) {
-						actorInfo += "<li data-type='film' data-id='" + item["_id"] + "'><span>"+ item["title"] + " - " + item["releaseYear"] +"</span></li>";
+						actorInfo += "<li data-type='film' data-id='" + item["_id"] + "'><span> <a href='/filme/"+item["_id"]+"'> "+ item["title"] + "</a> - " + item["releaseYear"] +"</span></li>";
 					});
 
 				actorInfo += "</ul></dd>";	
@@ -100,7 +100,7 @@ MDB.showActor = (function() {
 		var myData = JSON.stringify(actor);
 
 		$.ajax({
-			url: "/ws/actor/" + actorId,
+			url: "/ws/actor/show/" + actorId,
 			method: "PUT",
 			contentType: "application/json",
 			dataType: "json",

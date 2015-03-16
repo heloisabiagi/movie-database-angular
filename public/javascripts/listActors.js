@@ -12,7 +12,7 @@ MDB.listActors = (function() {
 
 				$.each(data, function(index, item) {
 					if(item["name"]) {
-						actorsList += "<li data-id='" + item["_id"]+ "'><strong>" + item["name"]+ "</strong> - " + item["placeOfBirth"]+" <a class='see-more' href='/ator/" + item["_id"] + "'>Detalhes</a> <span class='delete-span delete-actor'>Excluir</span> </li>";
+						actorsList += "<li data-id='" + item["_id"]+ "'><a href='/ator/" + item["_id"] +"'><strong>" + item["name"]+ "</strong></a> - " + item["placeOfBirth"]+" <span class='delete-span delete-actor'>Excluir</span> </li>";
 					}
 				});
 
@@ -27,7 +27,7 @@ MDB.listActors = (function() {
 		var id = el.parent().attr("data-id");
 
 		$.ajax({
-			url: "/ws/actor/" + id,
+			url: "/ws/actor/show/" + id,
 			method: "DELETE",
 			contentType: "application/json",
 			dataType: "json",

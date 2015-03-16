@@ -1,0 +1,20 @@
+{>layout /}
+
+{<title}{pageTitle}{/title}
+
+{<main}
+	<div class="row">
+		<dl id="show-movie">
+		</dl>
+	</div>
+
+	<div class="row form-buttons">
+		<div class="large-6 columns">
+			<button class="edit-movie"> Editar </button>	
+		</div>
+	</div>	
+{/main}	
+
+{<scripts}
+	<script src="/javascripts/showMovie.js"></script>
+{/scripts}	

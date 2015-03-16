@@ -12,7 +12,7 @@
 			<a href="/filme/cadastrar">Cadastrar Filme</a>
 		</li>
 		<li>
-			<a href="/filme/listar">Cadastrar Ator</a>
+			<a href="/ator/cadastrar">Cadastrar Ator</a>
 		</li>
 	</ul>
 </nav>

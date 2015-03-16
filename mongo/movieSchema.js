@@ -11,6 +11,7 @@ module.exports = function(app) {
 	});
 
 	var Movie = Mongoose.model('Movie', movieSchema);
+	var getActor = require("../mongo/actorSchema");
 
 	var methods = {
 		getList : function(callback) {
@@ -54,8 +55,6 @@ module.exports = function(app) {
 	      });
 	    },
 	    search : function(term, callback) {
-	    	console.log("Term Mongo: " + term);
-
 	      if(!term || term == "") {
 	      	Movie.find()
 		      .exec(function (err, result) {
@@ -68,9 +67,40 @@ module.exports = function(app) {
 		        callback(err, result || []);
 		      });
 	  	  }
+	    },
+	    update : function(id, data, callback) {
+	      if(!id) return callback({});
+
+	      delete data._id;
+	      delete data.created_at;
+	      data.modified_at = new Date();
+
+	      Movie.findByIdAndUpdate(id, { $set: data }, function (err, result) {
+	      	if(data.cast) {
+	      	for(i=0; i< data.cast.length; i++) {
+	      		var actorId = i;
+
+				/*	      		
+	      		Actor.findById(actorId)		
+			      .exec(function (err, result) {
+			      	console.log(result);
+			        callback(err, result || {});
+			      });
+			    */  
+				
+
+	      	}
+	      }
+	        callback(err, result || {});
+	      });
+
 	    }
 	}
 
-	return methods;
+	var Public = {};
+	Public.Movie = Movie;
+	Public.methods = methods;
+
+	return Public;
 
 }

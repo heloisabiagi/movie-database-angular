@@ -15,7 +15,7 @@ router.get('/ator/listar', function(req, res) {
 });
 
 router.get('/ator/:id', function(req, res) {
-  	res.render('detalhe-ator', { pageTitle: "Ator"});
+  	res.render('detalhe-ator', { pageTitle: "Ver Ator"});
 });
 
 router.get('/filme/cadastrar', function(req, res) {
@@ -24,6 +24,10 @@ router.get('/filme/cadastrar', function(req, res) {
 
 router.get('/filme/listar', function(req, res) {
   	res.render('listar-filme', { pageTitle: "Listar Filmes"});
+});
+
+router.get('/filme/:id', function(req, res) {
+  	res.render('detalhe-filme', { pageTitle: "Ver Filme"});
 });
 
 

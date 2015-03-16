@@ -1,6 +1,7 @@
 module.exports = function(app) {  
   
-  var application = require("../mongo/actorSchema")();   
+  var applicationGet = require("../mongo/actorSchema")();
+  var application = applicationGet.methods;   
 
   var routes = {    
   	 get: function(req, res, next) {
@@ -40,6 +41,8 @@ module.exports = function(app) {
     },
 
     search: function(req, res, next) {
+      console.log("Buscaaaa");
+
       var term = req.query.term;
 
       application.search(term, function(err, result) {
@@ -55,7 +58,7 @@ module.exports = function(app) {
   .get(routes.get)
   .post(routes.post);
 
-  app.route('/ws/actor/:id')
+  app.route('/ws/actor/show/:id')
   .put(routes.put)
   .get(routes.get)
   .delete(routes.delete);

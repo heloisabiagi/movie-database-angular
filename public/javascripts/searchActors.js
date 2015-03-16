@@ -14,7 +14,7 @@ MDB.searchActors = (function() {
 
 				$.each(data, function(index, item) {
 					if(item["name"]) {
-						actorsList += "<li data-id='" + item["_id"]+ "'><strong>" + item["name"]+ "</strong> - " + item["placeOfBirth"]+" <span class='delete-film'>Excluir</span></li>";
+						actorsList += "<li data-id='" + item["_id"]+ "'><a href='/ator/" + item["_id"] + "'> <strong>" + item["name"]+ "</strong></a> - " + item["placeOfBirth"]+" <span class='delete-span delete-film'>Excluir</span></li>";
 					}
 				});
 
