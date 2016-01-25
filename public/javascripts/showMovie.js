@@ -17,14 +17,6 @@ MDB.showMovie = (function() {
 				movieInfo += "<dd id='rating'>" + data.rating + "</dd>";
 				movieInfo += "<dt>Ano de lançamento:</dt>";
 				movieInfo += "<dd class='data' data-type='number' id='releaseYear'>" + data.releaseYear + "</dd>";
-				movieInfo += "<dt>Elenco:</dt>";
-				movieInfo += "<dd id='cast'><ul class='cast'>";
-
-					$.each(data.cast, function(index, item) {
-						movieInfo += "<li data-type='actor' data-id='" + item["_id"] + "'><span> <a href='/ator/"+item["_id"]+"'> "+ item["name"] +"</a></span></li>";
-					});
-
-				movieInfo += "</ul></dd>";	
 
 				$("#show-movie").html(movieInfo);
 				if(update) {
@@ -56,13 +48,9 @@ MDB.showMovie = (function() {
 			el.html(editInput);
 		});
 
-		$("ul.cast").append("<li data-type='actor'><input type='text' class='cast' value='Adicionar Ator'></input></li>")
-		$("li[data-type='actor'] span").append(' <span class="delete-span delete-actor">Excluir</span>');
 		$(".form-buttons").append('<button class="cancel-edit alert"> Cancelar </button> <button class="save-edit success"> Salvar </button>');
 		$(".edit-movie").hide();
-		MDB.showMovie.removeActor();
 		MDB.showMovie.cancelEdition();
-		MDB.showMovie.updateCast();
 		MDB.showMovie.saveEdition();
 	}
 
@@ -77,14 +65,6 @@ MDB.showMovie = (function() {
 		movie.rating = list.find("#rating").text();
 		movie.releaseYear = parseInt(list.find("input#releaseYear").val());
 		movie.hasCreditCookie = false;
-		movie.cast = [];
-
-		$("li[data-type='actor']").each(function(){
-			var actor = $(this).attr('data-id');
-			if(actor && actor !== "") {
-				movie.cast.push(actor);
-			}
-		});
 
 		var myData = JSON.stringify(movie);
 
@@ -104,14 +84,6 @@ MDB.showMovie = (function() {
 
 	}
 
-	function removeActor(el) {
-		el.closest("li").remove();
-	}
-
-	function updateCast(el, actor) {
-		el.closest("li").attr("data-id", actor);
-	}
-
 	return {
 		init: function(){
 			getMovie();
@@ -120,19 +92,6 @@ MDB.showMovie = (function() {
 		events: function() {
 			$(".edit-movie").on("click", function(){
 				editMovie();
-			});
-		},
-		updateCast: function() {
-			$("input.cast").on("blur", function(){
-				var el = $(this);
-				var actor = $(this).val();
-				updateCast(el, actor);
-			});
-		},
-		removeActor: function() {
-			$(".delete-actor").on("click", function(){
-				el = $(this);
-				removeActor(el);
 			});
 		},
 		cancelEdition: function() {

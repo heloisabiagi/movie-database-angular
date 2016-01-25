@@ -29,14 +29,6 @@ MDB.showActor = (function() {
 				actorInfo += "<dd class='data' data-type='date' data-day='" + birthDay.getFullYear() + "-" + month + "-" + day + "' id='dateOfBirth'>" + birthDay.getDate() + "/" + birthDay.getMonth() + "/" + birthDay.getFullYear() + "</dd>";
 				actorInfo += "<dt>Local de nascimento:</dt>";
 				actorInfo += "<dd class='data' data-type='text' id='placeOfBirth'>" + data.placeOfBirth + "</dd>";
-				actorInfo += "<dt>Filmes:</dt>";
-				actorInfo += "<dd id='filmography'><ul class='filmography'>";
-
-					$.each(data.filmography, function(index, item) {
-						actorInfo += "<li data-type='film' data-id='" + item["_id"] + "'><span> <a href='/filme/"+item["_id"]+"'> "+ item["title"] + "</a> - " + item["releaseYear"] +"</span></li>";
-					});
-
-				actorInfo += "</ul></dd>";	
 
 				$("#show-actor").html(actorInfo);
 				if(update) {
@@ -67,13 +59,9 @@ MDB.showActor = (function() {
 			el.html(editInput);
 		});
 
-		$("ul.filmography").append("<li data-type='film'><input type='text' class='filmography' value='Adicionar Filme'></input></li>")
-		$("li[data-type='film'] span").append(' <span class="delete-span delete-film">Excluir</span>');
 		$(".form-buttons").append('<button class="cancel-edit alert"> Cancelar </button> <button class="save-edit success"> Salvar </button>');
 		$(".edit-actor").hide();
-		MDB.showActor.removeMovie();
 		MDB.showActor.cancelEdition();
-		MDB.showActor.updateFilmography();
 		MDB.showActor.saveEdition();
 	}
 
@@ -88,14 +76,6 @@ MDB.showActor = (function() {
 		actor.name = list.find("input#name").val();
 		actor.dateOfBirth = new Date(formattedDate);
 		actor.placeOfBirth = list.find("input#placeOfBirth").val();
-		actor.filmography = [];
-
-		$("li[data-type='film']").each(function(){
-			var movie = $(this).attr('data-id');
-			if(movie && movie !== "") {
-				actor.filmography.push(movie);
-			}
-		});
 
 		var myData = JSON.stringify(actor);
 
@@ -115,14 +95,6 @@ MDB.showActor = (function() {
 
 	}
 
-	function removeMovie(el) {
-		el.closest("li").remove();
-	}
-
-	function updateFilm(el, film) {
-		el.closest("li").attr("data-id", film);
-	}
-
 	return {
 		init: function(){
 			getActor();
@@ -131,19 +103,6 @@ MDB.showActor = (function() {
 		events: function() {
 			$(".edit-actor").on("click", function(){
 				editActor();
-			});
-		},
-		updateFilmography: function() {
-			$("input.filmography").on("blur", function(){
-				var el = $(this);
-				var film = $(this).val();
-				updateFilm(el, film);
-			});
-		},
-		removeMovie: function() {
-			$(".delete-film").on("click", function(){
-				el = $(this);
-				removeMovie(el);
 			});
 		},
 		cancelEdition: function() {

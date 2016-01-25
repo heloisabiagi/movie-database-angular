@@ -1,6 +1,9 @@
 <nav class="top-bar" data-topbar role="navigation">
 	<ul class="inline-list" id="global-nav">
 		<li>
+			<a href="/">*** MOVIE DATABASE ***</a>
+		</li>
+		<li>
 			<a href="/filme/listar">Ver Filmes</a>
 		</li>
 

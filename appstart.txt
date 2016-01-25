@@ -1,0 +1,13 @@
+## Janela 1:
+cd /app/movie-database
+mongod --dbpath data
+
+## Janela 2:
+cd /app/movie-database
+mongo
+
+## Janela 3: 
+cd /app/movie-database
+npm start
+
+## localhost:3000

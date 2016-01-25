@@ -31,16 +31,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// WS
-var movies = require('./controllers/MovieController.js')(app);
-var actors = require('./controllers/ActorController.js')(app);
+// WS ROUTES
+var ws_movies = require('./controllers/MovieController.js')(app);
+var ws_actors = require('./controllers/ActorController.js')(app);
 
-// SET ROUTES
-
-var routes = require('./routes/index');
+// RENDER ROUTES
+var home = require('./routes/home');
+var movies = require('./routes/movies');
+var actors = require('./routes/actors');
 
 // ROUTES
-app.use('/', routes);
+app.use('/', home);
+app.use('/', movies);
+app.use('/', actors);
+
+//app.use('/', ws_movies);
+//app.use('/', ws_actors);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
