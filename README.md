@@ -15,6 +15,6 @@ I suppose you already have a Node.js version installed, as well as MongoDB. In o
 ### Tab 3
 <pre>npm start</pre>
 
-The app now should be running at http://localhost:3000
+The app now should be running at **http://localhost:3000**
 
 It's a small project, but I hope you enjoy it.
