@@ -35,14 +35,12 @@ module.exports = function(app) {
 
     delete: function(req, res, next) {
      application.remove(req.params.id, function(err, result) {
-        if(err) return res.json(500, err);
-        res.json(result || {});
+          if(err) return res.json(500, err);
+          res.json(result || {});
       });
     },
 
     search: function(req, res, next) {
-      console.log("Buscaaaa");
-
       var term = req.query.term;
 
       application.search(term, function(err, result) {

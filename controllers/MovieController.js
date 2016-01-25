@@ -40,8 +40,6 @@ module.exports = function(app) {
     },
 
     search: function(req, res, next) {
-      console.log("Buscaaaa");
-
       var term = req.query.term;
 
       application.search(term, function(err, result) {
