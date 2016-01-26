@@ -23,6 +23,8 @@ MDB.addActor = (function() {
 				alert("Ator cadastrado com sucesso!");
 				resetForm();
 			}
+		}).done(function(){
+			MDB.socket.emit('refresh actors', 'catálogo atualizado');
 		});
 
 	}
@@ -42,6 +44,10 @@ MDB.addActor = (function() {
 			var form = $(this);
 			postActor(form);
 		});
+
+		MDB.socket.on('refresh actors', function(msg){
+			console.log(msg);
+  		});
 
 	}
 

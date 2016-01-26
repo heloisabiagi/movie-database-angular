@@ -33,6 +33,7 @@ MDB.listActors = (function() {
 			dataType: "json",
 			success: function(data) {
 				alert("Ator excluído com sucesso");
+				MDB.socket.emit('refresh actors', 'catálogo atualizado');
 			}
 		});
 
@@ -44,6 +45,9 @@ MDB.listActors = (function() {
 			this.events();
 		},
 		events: function() {
+			MDB.socket.on('refresh actors', function(msg){
+				getActorsList();
+  			});
 
 			this.deleteActor();
 		},

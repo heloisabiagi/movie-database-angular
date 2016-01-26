@@ -11,6 +11,10 @@ module.exports = function(app) {
 	    io.emit('refresh list', msg);
 	  });
 
+	  socket.on('refresh actors', function(msg){
+	    io.emit('refresh actors', msg);
+	  });
+
 	});
 
 	app.start = app.listen = function(){
