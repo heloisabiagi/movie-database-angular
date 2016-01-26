@@ -3,32 +3,36 @@
 {<title} {pageTitle} {/title}
 
 {<main}
-	<form id="actor-form">
-		<div class="row">
-			<div class="large-12 columns">
-				<label for="name">Nome:</label> <input type="text" name="name" id="name" />
-			</div>
+	<div class="row">
+		<div class="large-12 columns large-centered">
+			<form id="actor-form">
+				<div class="row">
+					<div class="large-12 columns">
+						<label for="name">Nome:</label> <input type="text" name="name" id="name" />
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="large-12 columns">
+						<label for="dateOfBirth">Data de nascimento:</label> <input type="date" name="dateOfBirth" id="dateOfBirth" />
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="large-6 columns">
+						<label for="placeOfBirth">Local de nascimento:</label> <input type="text" name="placeOfBirth" id="placeOfBirth" />
+					</div> 
+				</div>
+
+				<div class="row">
+					<div class="large-6 columns">
+						<input type="submit" value="Cadastrar" class="button" />	
+					</div>
+				</div>	
+			</form>
 		</div>
-
-		<div class="row">
-			<div class="large-12 columns">
-				<label for="dateOfBirth">Data de nascimento:</label> <input type="date" name="dateOfBirth" id="dateOfBirth" />
-			</div>
-		</div>
-
-
-		<div class="row">
-			<div class="large-6 columns">
-				<label for="placeOfBirth">Local de nascimento:</label> <input type="text" name="placeOfBirth" id="placeOfBirth" />
-			</div> 
-		</div>
-
-		<div class="row">
-			<div class="large-6 columns">
-				<input type="submit" value="Cadastrar" />	
-			</div>
-		</div>	
-	</form>
+	</div>
 
 {/main}	
 

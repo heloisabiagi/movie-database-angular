@@ -7,7 +7,7 @@
 	padding: 10px 20px;
 }
 
-#movie-form {
+#movie-form, #actor-form, #show-movie, #show-actor {
 	max-width: 600px;
 }
 

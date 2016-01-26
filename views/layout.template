@@ -25,7 +25,9 @@
   {> "partials/header.template" /}
   <div class="page">
     <div id="main" class="clearfix">	
-      {+main}{/main}
+      <div class="container">
+        {+main}{/main}
+      </div>
     </div><!-- #main -->
 
     <footer>

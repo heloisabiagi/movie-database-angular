@@ -4,8 +4,10 @@
 
 {<main}
 	<div class="row">
-		<dl id="show-actor">
-		</dl>
+		<div class="large-12 columns">
+			<dl id="show-actor">
+			</dl>
+		</div>
 	</div>
 
 	<div class="row form-buttons">

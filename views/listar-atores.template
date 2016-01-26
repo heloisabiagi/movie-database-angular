@@ -3,22 +3,31 @@
 {<title}{pageTitle}{/title}
 
 {<main}
-	<div id="search-container" class="row">
-		<form id="search-form">
-			<div class="large-6 columns">
-				<input type="text" id="search-box" name="searchBox" />
-			</div>
+	<div class="row">
+		<div class="large-12 columns large-centered">
+			<div id="search-container" class="row">
+				<div class="large-12 columns">
+					<form id="search-form">
+						<div class="large-6 columns">
+							<input type="text" id="search-box" name="searchBox" />
+						</div>
 
-			<div class="large-2 columns">
-				<input type="submit" id="search-button" name="searchButton" class="button tiny"  value="Buscar" />
+						<div class="large-2 columns">
+							<input type="submit" id="search-button" name="searchButton" class="button tiny"  value="Buscar" />
+						</div>
+						<div class="large-2 columns">
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="large-2 columns">
-			</div>
-		</form>
+		</div>
 	</div>
-	
-	<ul id="actors-list">
-	</ul
+	<div class="row">
+		<div class="large-12 columns large-centered">
+			<ul id="actors-list">
+			</ul>
+		</div>
+	</div>
 {/main}	
 
 {<scripts}
