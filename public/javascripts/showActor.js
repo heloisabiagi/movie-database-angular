@@ -11,22 +11,24 @@ MDB.showActor = (function() {
 			success: function(data) {
 
 				var birthDay = new Date(data.dateOfBirth);
+
 				var day = birthDay.getDate();
 				var month = birthDay.getMonth();
+				var monthPosition = month + 1;
 
 				if(day < 10) {
 					day = "0" + day;
 				}
 
-				if(month < 10) {
-					month = "0" + month;
+				if(monthPosition < 10) {
+					monthPosition = "0" + monthPosition;
 				}
 
 				var actorInfo = "";
 				actorInfo += "<dt>Nome:</dt>";
 				actorInfo += "<dd class='data' data-type='text' id='name'>" + data.name + "</dd>";
 				actorInfo += "<dt>Data de nascimento:</dt>";
-				actorInfo += "<dd class='data' data-type='date' data-day='" + birthDay.getFullYear() + "-" + month + "-" + day + "' id='dateOfBirth'>" + birthDay.getDate() + "/" + birthDay.getMonth() + "/" + birthDay.getFullYear() + "</dd>";
+				actorInfo += "<dd class='data' data-type='date' data-day='" + birthDay.getFullYear() + "-" + monthPosition + "-" + day + "' id='dateOfBirth'>" + day + "/" + monthPosition + "/" + birthDay.getFullYear() + "</dd>";
 				actorInfo += "<dt>Local de nascimento:</dt>";
 				actorInfo += "<dd class='data' data-type='text' id='placeOfBirth'>" + data.placeOfBirth + "</dd>";
 
