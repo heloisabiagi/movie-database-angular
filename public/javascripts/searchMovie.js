@@ -1,43 +1,51 @@
 MDB.searchMovie = (function() {
+	var form = document.getElementById("search-form");
+	var box = document.getElementById("search-box");
 
 	function searchMovieService(term) {
 
-		var term = term || $("#search-box").val();
+		var term = term || box.value;
 
-		$.ajax({
-			url: "/ws/film/search?term=" + term,
-			method: "GET",
-			contentType: "application/json",
-			dataType: "json",
-			success: function(data) {
-				var filmList = "";
-
-				$.each(data, function(index, item) {
-					if(item["title"]) {
-						filmList += "<li data-id='" + item["_id"]+ "'><a href='/filme/" + item["_id"] + "'> <strong>" + item["title"]+ "</strong> </a> - " + item["releaseYear"]+" <span class='delete-span delete-film'>Excluir</span></li>";
-					}
-				});
-
-				$("#film-list").html(filmList);
-				MDB.listMovies.deleteMovie();
+		var url = "/ws/film/search?term=" + term;
+		var http = new XMLHttpRequest();
+		http.open("GET", url, true);
+		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
+		http.onreadystatechange = function() {//Call a function when the state changes.
+			if(http.readyState == 4 && http.status == 200) {
+				var data = JSON.parse(http.responseText);
+				searchResult(data);
 			}
-		});
+		}
+		http.send();
+
+	}
+
+	function searchResult(data){
+		var filmList = "";
+		for(fL =0; fL < data.length; fL++){
+			var item = data[fL];
+			if(item["title"]) {
+				filmList += "<li data-id='" + item["_id"]+ "'><a href='/filme/" + item["_id"] + "'> <strong>" + item["title"]+ "</strong> </a> - " + item["releaseYear"]+" <span class='delete-span delete-film'>Excluir</span></li>";
+			}
+		}
+
+		document.getElementById("film-list").innerHTML = filmList;
+		MDB.listMovies.deleteMovies();
 
 	}
 
 	function resetForm() {
-		var form = $("#search-form");
-		form.find("#search-box").val("");
+		box.value ="";
 	}
 
 	function bindEvents() {
-		$("#search-form").on("submit", function(e){
+		form.addEventListener("submit", function(e){
 			e.preventDefault();
 			searchMovieService();
 		});
 
-		$("#search-box").on("keyup", function(){
-			var term = $(this).val();
+		box.addEventListener("keyup", function(){
+			var term = this.value;
 			searchMovieService(term);
 		});
 

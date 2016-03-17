@@ -2,48 +2,47 @@ MDB.addActor = (function() {
 
 	function postActor(form) {
 		var actor = {};
-		var form = form;
 
-		var formattedDate = form.find("#dateOfBirth").val().replace("-", ",");
+		var formattedDate = form.querySelector("#dateOfBirth").value.replace("-", ",");
 
 
-		actor.name = form.find("#name").val();
+		actor.name = form.querySelector("#name").value;
 		actor.dateOfBirth = new Date(formattedDate);
-		actor.placeOfBirth = form.find("#placeOfBirth").val();
+		actor.placeOfBirth = form.querySelector("#placeOfBirth").value;
 
 		var myData = JSON.stringify(actor);
 
-		$.ajax({
-			url: "/ws/actor",
-			method: "POST",
-			contentType: "application/json",
-			dataType: "json",
-			data: myData,
-			success: function(xhr) {
+		var url = "/ws/actor";
+		
+		var http = new XMLHttpRequest();
+		http.open("POST", url, true);
+		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
+		http.onreadystatechange = function() {//Call a function when the state changes.
+			if(http.readyState == 4 && http.status == 200) {
 				alert("Ator cadastrado com sucesso!");
+				MDB.socket.emit('refresh actors', 'catálogo atualizado');
 				resetForm();
 			}
-		}).done(function(){
-			MDB.socket.emit('refresh actors', 'catálogo atualizado');
-		});
+		}
+		http.send(myData);
 
 	}
 
 	function resetForm() {
-		var form = $("#actor-form");
-		form.find("#name").val("");
-		form.find("#dateOfBirth").val("");
-		form.find("#placeOfBirth").val("");
-		$(".filmography").val("");
+		var form = document.querySelector("#actor-form");
+		form.querySelector("#name").value = "";
+		form.querySelector("#dateOfBirth").value = "";
+		form.querySelector("#placeOfBirth").value = "";
 	}
 
 	function bindEvents() {
-		$("#actor-form").on("submit", function(e){
-			e.preventDefault();
 
-			var form = $(this);
+		document.querySelector("#actor-form").addEventListener("submit", function(e){
+			e.preventDefault();
+			var form = this;
 			postActor(form);
 		});
+
 
 		MDB.socket.on('refresh actors', function(msg){
 			console.log(msg);

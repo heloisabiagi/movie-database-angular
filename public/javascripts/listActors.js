@@ -2,61 +2,75 @@ MDB.listActors = (function() {
 
 	function getActorsList() {
 
-		$.ajax({
-			url: "/ws/actor",
-			method: "GET",
-			contentType: "application/json",
-			dataType: "json",
-			success: function(data) {
-				var actorsList = "";
+		var url = "/ws/actor";
+		var http = new XMLHttpRequest();
+		http.open("GET", url, true);
+		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
+		http.onreadystatechange = function() {//Call a function when the state changes.
+			if(http.readyState == 4 && http.status == 200) {
+				var data = JSON.parse(http.responseText);
 
-				$.each(data, function(index, item) {
+				var actorsList = "";
+				for(i=0; i< data.length; i++){
+					var item = data[i];
 					if(item["name"]) {
 						actorsList += "<li data-id='" + item["_id"]+ "'><a href='/ator/" + item["_id"] +"'><strong>" + item["name"]+ "</strong></a> - " + item["placeOfBirth"]+" <span class='delete-span delete-actor'>Excluir</span> </li>";
 					}
-				});
+				}
 
-				$("#actors-list").html(actorsList);
-				MDB.listActors.deleteActor();
+				document.getElementById("actors-list").innerHTML = actorsList;
+				deleteActors();
 			}
-		});
+		}
+		http.send();
 
 	}
 
-	function deleteActor(el){
-		var id = el.parent().attr("data-id");
+	function deleteThisActor(el){
+		var id = el.parentElement.getAttribute("data-id");
 
-		$.ajax({
-			url: "/ws/actor/show/" + id,
-			method: "DELETE",
-			contentType: "application/json",
-			dataType: "json",
-			success: function(data) {
+		var url = "/ws/actor/show/" + id;
+		var http = new XMLHttpRequest();
+		http.open("DELETE", url, true);
+		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
+		http.onreadystatechange = function() {//Call a function when the state changes.
+			if(http.readyState == 4 && http.status == 200) {
 				alert("Ator excluído com sucesso");
 				MDB.socket.emit('refresh actors', 'catálogo atualizado');
 			}
-		});
+		}
+		http.send();
+
+	}
+
+	function deleteActors(){
+		var deleteButtons = document.querySelectorAll(".delete-actor");
+		for(dB=0; dB< deleteButtons.length; dB++){
+			var deleteButton = deleteButtons[dB];
+
+			deleteButton.addEventListener("click", function(){
+				var el = this;
+				console.log(el);
+				deleteThisActor(el);
+			});
+		}
+	}
+
+	function bindEvents(){
+		MDB.socket.on('refresh actors', function(msg){
+				getActorsList();
+  		});
+
+		deleteActors();
 
 	}
 
 	return {
 		init: function(){
 			getActorsList();
-			this.events();
+			bindEvents();
 		},
-		events: function() {
-			MDB.socket.on('refresh actors', function(msg){
-				getActorsList();
-  			});
-
-			this.deleteActor();
-		},
-		deleteActor: function() {
-			$(".delete-actor").on("click", function(){
-				var el = $(this);
-				deleteActor(el);
-			});
-		}
+		deleteActors: deleteActors
 	}
 })();
 

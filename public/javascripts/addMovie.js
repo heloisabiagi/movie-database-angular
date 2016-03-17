@@ -4,42 +4,42 @@ MDB.addMovie = (function() {
 		var movie = {};
 
 		var form = form;
-		movie.title = form.find("#title").val();
-		movie.rating = form.find("#rating").val();
-		movie.releaseYear = form.find("#releaseYear").val();
+		movie.title = form.querySelector("#title").value;
+		movie.rating = form.querySelector("#rating").value;
+		movie.releaseYear = form.querySelector("#releaseYear").value;
 		movie.hasCreditCookie = false;
 
 		var myData = JSON.stringify(movie);
 
-		$.ajax({
-			url: "/ws/film",
-			method: "POST",
-			contentType: "application/json",
-			dataType: "json",
-			data: myData,
-			success: function(xhr) {
+		var url = "/ws/film";
+		var http = new XMLHttpRequest();
+		http.open("POST", url, true);
+
+		//Send the proper header information along with the request
+		http.setRequestHeader("Content-type", "application/json");
+		http.onreadystatechange = function() {//Call a function when the state changes.
+			if(http.readyState == 4 && http.status == 200) {
 				alert("Filme cadastrado com sucesso!");
+				MDB.socket.emit('refresh list', 'catálogo atualizado');
 				resetForm();
 			}
-		}).done(function(){
-			MDB.socket.emit('refresh list', 'catálogo atualizado');
-		});
+		}
+		http.send(myData);
 
 	}
 
 	function resetForm() {
-		var form = $("#movie-form");
-		form.find("#title").val("");
-		form.find("#rating").val("free");
-		form.find("#releaseYear").val("");
-		$(".cast").val("");
+		var form = document.querySelector("#movie-form");
+		form.querySelector("#title").value = "";
+		form.querySelector("#rating").value = "";
+		form.querySelector("#releaseYear").value = "";
 	}
 
 	function bindEvents() {
-		$("#movie-form").on("submit", function(e){
+		document.querySelector("#movie-form").addEventListener("submit", function(e){
 			e.preventDefault();
 
-			var form = $(this);
+			var form = this;
 			postMovie(form);
 		});
 

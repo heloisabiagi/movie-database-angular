@@ -1,43 +1,52 @@
 MDB.searchActors = (function() {
+	var form = document.getElementById("search-form");
+	var box = document.getElementById("search-box");
 
 	function searchActorService(term) {
 
-		var term = term || $("#search-box").val();
+		var term = term || box.value;
 
-		$.ajax({
-			url: "/ws/actor/search?term=" + term,
-			method: "GET",
-			contentType: "application/json",
-			dataType: "json",
-			success: function(data) {
-				var actorsList = "";
-
-				$.each(data, function(index, item) {
-					if(item["name"]) {
-						actorsList += "<li data-id='" + item["_id"]+ "'><a href='/ator/" + item["_id"] + "'> <strong>" + item["name"]+ "</strong></a> - " + item["placeOfBirth"]+" <span class='delete-span delete-film'>Excluir</span></li>";
-					}
-				});
-
-				$("#actors-list").html(actorsList);
-				MDB.listActors.deleteActor();
+		var url = "/ws/actor/search?term=" + term;
+		var http = new XMLHttpRequest();
+		http.open("GET", url, true);
+		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
+		http.onreadystatechange = function() {//Call a function when the state changes.
+			if(http.readyState == 4 && http.status == 200) {
+				var data = JSON.parse(http.responseText);
+				searchResult(data);
 			}
-		});
+		}
+		http.send();
+
+	}
+
+	function searchResult(data){
+		var actorsList = "";
+		for(aL=0; aL < data.length; aL++){
+			var item = data[aL];
+
+			if(item["name"]) {
+				actorsList += "<li data-id='" + item["_id"]+ "'><a href='/ator/" + item["_id"] + "'> <strong>" + item["name"]+ "</strong></a> - " + item["placeOfBirth"]+" <span class='delete-span delete-actor'>Excluir</span></li>";
+			}
+		}
+
+		document.getElementById("actors-list").innerHTML = actorsList;
+		MDB.listActors.deleteActors();
 
 	}
 
 	function resetForm() {
-		var form = $("#search-form");
-		form.find("#search-box").val("");
+		box.value = "";
 	}
 
 	function bindEvents() {
-		$("#search-form").on("submit", function(e){
+		form.addEventListener("submit", function(e){
 			e.preventDefault();
 			searchActorService();
 		});
 
-		$("#search-box").on("keyup", function(){
-			var term = $(this).val();
+		box.addEventListener("keyup", function(){
+			var term = this.value;
 			searchActorService(term);
 		});
 
