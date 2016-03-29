@@ -9,6 +9,7 @@ MDB.addActor = (function() {
 		actor.name = form.querySelector("#name").value;
 		actor.dateOfBirth = new Date(formattedDate);
 		actor.placeOfBirth = form.querySelector("#placeOfBirth").value;
+		actor.shortBio = form.querySelector("#shortBio").value;
 
 		var myData = JSON.stringify(actor);
 
@@ -19,7 +20,7 @@ MDB.addActor = (function() {
 		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
 		http.onreadystatechange = function() {//Call a function when the state changes.
 			if(http.readyState == 4 && http.status == 200) {
-				alert("Ator cadastrado com sucesso!");
+				alert("Actor added successfully!");
 				MDB.socket.emit('refresh actors', 'catálogo atualizado');
 				resetForm();
 			}
@@ -29,10 +30,10 @@ MDB.addActor = (function() {
 	}
 
 	function resetForm() {
-		var form = document.querySelector("#actor-form");
-		form.querySelector("#name").value = "";
-		form.querySelector("#dateOfBirth").value = "";
-		form.querySelector("#placeOfBirth").value = "";
+		var formEls = document.querySelectorAll("#actor-form .form-control");
+		for(fE=0; fE < formEls.length; fE++){
+			formEls[fE].value = "";
+		}
 	}
 
 	function bindEvents() {

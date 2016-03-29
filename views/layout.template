@@ -11,8 +11,7 @@
   {+meta-tags}
   {/meta-tags}
 
-  <link rel="stylesheet" type="text/css" href="/stylesheets/normalize.css"></script>
-  <link rel="stylesheet" type="text/css" href="/stylesheets/foundation.min.css"></script>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap-superhero.min.css"></script>
   <link rel="stylesheet" type="text/css" href="/stylesheets/global.css"></script>
   {+style}{/style}
   {+scriptsHead}{/scriptsHead}
@@ -21,7 +20,7 @@
 <body class="{+bodyClass}{/bodyClass}">
 {+beforeContainer}{/beforeContainer}
 
-<div id="site-container" class="container">
+<div id="site-container">
   {> "partials/header.template" /}
   <div class="page">
     <div id="main" class="clearfix">	
@@ -42,6 +41,7 @@
   var MDB = MDB || {};
   MDB.socket = io(); 
 </script>
+<script src="/javascripts/helpers.js"></script>
 {+scripts}{/scripts}
 </body>
 </html>    

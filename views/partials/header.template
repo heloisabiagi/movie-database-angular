@@ -1,21 +1,24 @@
-<nav class="top-bar" data-topbar role="navigation">
-	<ul class="inline-list" id="global-nav">
-		<li>
-			<a href="/">*** MOVIE DATABASE ***</a>
-		</li>
-		<li>
-			<a href="/filme/listar">Ver Filmes</a>
-		</li>
 
-		<li>
-			<a href="/ator/listar">Ver Atores</a>
-		</li>
-
-		<li>
-			<a href="/filme/cadastrar">Cadastrar Filme</a>
-		</li>
-		<li>
-			<a href="/ator/cadastrar">Cadastrar Ator</a>
-		</li>
-	</ul>
-</nav>
+<header id="main-header">
+    <nav id ="navigation-top" class="navbar navbar-default" data-behavior="navShrink">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><span class="brand-logo"><span class="glyphicon glyphicon-film" aria-hidden="true"></span> <span class="site-name">Movie Database</span></span></a>
+            </div> <!-- /navbar-header -->
+            <div class="collapse navbar-collapse" id="main-nav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/film/list">Movies</a></li>
+                    <li><a href="/actor/list">Actors</a></li>
+                    <li><a href="/film/add">Add Movie</a></li>
+                    <li><a href="/actor/add">Add Actor</a></li>
+                </ul>
+            </div> <!-- /navbar-collapse -->
+        </div> <!-- /container -->
+    </nav>
+</header>

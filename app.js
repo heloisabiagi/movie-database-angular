@@ -32,12 +32,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // WS ROUTES
-var ws_movies = require('./controllers/MovieController.js')(app);
+var ws_movies = require('./controllers/FilmController.js')(app);
 var ws_actors = require('./controllers/ActorController.js')(app);
 
 // RENDER ROUTES
 var home = require('./routes/home');
-var movies = require('./routes/movies');
+var movies = require('./routes/films');
 var actors = require('./routes/actors');
 
 // ROUTES

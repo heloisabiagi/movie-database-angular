@@ -26,7 +26,8 @@ MDB.searchActors = (function() {
 			var item = data[aL];
 
 			if(item["name"]) {
-				actorsList += "<li data-id='" + item["_id"]+ "'><a href='/ator/" + item["_id"] + "'> <strong>" + item["name"]+ "</strong></a> - " + item["placeOfBirth"]+" <span class='delete-span delete-actor'>Excluir</span></li>";
+				var getActor = MDB.listActors.renderActor(item);
+				actorsList += "<li data-id='" + item["_id"]+ "'>" + getActor + "</li>";
 			}
 		}
 

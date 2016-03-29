@@ -34,15 +34,21 @@ MDB.showActor = (function() {
 		}
 
 		var actorInfo = "";
-		actorInfo += "<dt>Nome:</dt>";
+		actorInfo += "<dt class='hidden'>Name:</dt>";
 		actorInfo += "<dd class='data' data-type='text' id='name'>" + data.name + "</dd>";
-		actorInfo += "<dt>Data de nascimento:</dt>";
+		actorInfo += "<dt>Date of birth:</dt>";
 		actorInfo += "<dd class='data' data-type='date' data-day='" + birthDay.getFullYear() + "-" + monthPosition + "-" + day + "' id='dateOfBirth'>" + day + "/" + monthPosition + "/" + birthDay.getFullYear() + "</dd>";
-		actorInfo += "<dt>Local de nascimento:</dt>";
+		actorInfo += "<dt>Place of Birth:</dt>";
 		actorInfo += "<dd class='data' data-type='text' id='placeOfBirth'>" + data.placeOfBirth + "</dd>";
+		actorInfo += "<dt>Bio</dt>";
+		actorInfo += "<dd class='data' data-type='textarea' id='shortBio'>" + data.shortBio + "</dd>";
 
 		var actorContainer = document.getElementById("show-actor");
 		actorContainer.innerHTML = actorInfo;
+
+		var actorName = data["name"].toLowerCase().replace(/\s/g, "-");
+		var posterContainer = document.querySelector(".actor-poster");
+		posterContainer.innerHTML = '<img src="/images/'+ actorName+ '.jpg" alt="'+ data["name"] +'">';
 
 		if(update) {
 			document.querySelector(".edit-actor").style.display = "block";
@@ -62,17 +68,20 @@ MDB.showActor = (function() {
 			switch(true) {
 
 			case el.getAttribute("data-type") == "date":
-				editInput = "<input type='date' id='" + el.getAttribute("id") + "' value='"+ el.getAttribute("data-day")+ "' />";
+				editInput = "<input class='form-control' type='date' id='edit-" + el.getAttribute("id") + "' value='"+ el.getAttribute("data-day")+ "' />";
+			break;
+			case el.getAttribute("data-type") == "textarea":
+				editInput = "<textarea class='form-control' id='edit-" + el.getAttribute("id") + "'>" +el.textContent +"</textarea>";
 			break;
 
 			default:
-				editInput = "<input type='text' id='" + el.getAttribute("id") + "' value='" + el.textContent +"' />";
+				editInput = "<input class='form-control' type='text' id='edit-" + el.getAttribute("id") + "' value='" + el.textContent +"' />";
 			}
 
 			el.innerHTML = editInput;
 		}
 
-		document.querySelector(".form-buttons").innerHTML = document.querySelector(".form-buttons").innerHTML + '<button class="cancel-edit alert"> Cancelar </button> <button class="save-edit success"> Salvar </button>';
+		document.querySelector(".form-buttons").innerHTML = document.querySelector(".form-buttons").innerHTML + '<button class="cancel-edit btn btn-default"> Cancel </button> <button class="save-edit btn btn-primary"> Save </button>';
 		document.querySelector(".edit-actor").style.display = "none";
 		updateEvents();
 	}
@@ -81,13 +90,15 @@ MDB.showActor = (function() {
 	function updateActor(){
 		var actor = {};
 		var list = document.getElementById("show-actor");
-		var formattedDate = list.querySelector("input#dateOfBirth").value.replace("-", ",");
+		var formattedDate = list.querySelector("#edit-dateOfBirth").value.replace("-", ",");
 		var actorId = location.pathname.split("/").pop();
 
 		actor._id = actorId;
-		actor.name = list.querySelector("input#name").value;
+		actor.name = list.querySelector("#edit-name").value;
 		actor.dateOfBirth = new Date(formattedDate);
-		actor.placeOfBirth = list.querySelector("input#placeOfBirth").value;
+		actor.placeOfBirth = list.querySelector("#edit-placeOfBirth").value;
+		actor.shortBio = list.querySelector("#edit-shortBio").value;
+		console.log(actor.shortBio);
 
 		var myData = JSON.stringify(actor);
 
@@ -98,7 +109,7 @@ MDB.showActor = (function() {
 		http.onreadystatechange = function() {//Call a function when the state changes.
 			if(http.readyState == 4 && http.status == 200) {
 				var data = JSON.parse(http.responseText);
-				alert("Dados atualizados com sucesso!");
+				alert("Data uploaded successfully");
 				getActor("update");
 				editEvents();
 			}

@@ -14,7 +14,9 @@ MDB.listActors = (function() {
 				for(i=0; i< data.length; i++){
 					var item = data[i];
 					if(item["name"]) {
-						actorsList += "<li data-id='" + item["_id"]+ "'><a href='/ator/" + item["_id"] +"'><strong>" + item["name"]+ "</strong></a> - " + item["placeOfBirth"]+" <span class='delete-span delete-actor'>Excluir</span> </li>";
+						var getActor = renderActor(item);
+						actorsList += "<li data-id='" + item["_id"]+ "'>" + getActor + "</li>";
+						// actorsList += "<li data-id='" + item["_id"]+ "'><a href='/actor/" + item["_id"] +"'><strong>" + item["name"]+ "</strong></a> - " + item["placeOfBirth"]+" <span class='delete-span delete-actor'>Delete</span> </li>";
 					}
 				}
 
@@ -26,8 +28,24 @@ MDB.listActors = (function() {
 
 	}
 
+	function renderActor(item){
+		var output;
+		var actorName = item["name"].toLowerCase().replace(/\s/g, "-");
+		  output = '<div class="media">';
+		  output += '<a class="media-left" href="/actor/'+ item["_id"]+'">';
+		  output += '<img class="media-object" src="/images/'+ actorName+ '.jpg" alt="'+ item["name"]+'">';
+		  output += '</a>';
+		  output += '<div class="media-body">';
+		  output += '<h3 class="media-heading"><a href="/actor/' + item["_id"] +'">'+ item["name"] +'</a> <span class="delete-span delete-actor">Delete</span></h3>';
+		  output += '<span class="small-data">' + item["placeOfBirth"] + '</span>';
+		  output += '<p>' + item["shortBio"] +'</p>';
+		  output += '</div>';
+		  output += '</div>';
+		  return output;
+	}
+
 	function deleteThisActor(el){
-		var id = el.parentElement.getAttribute("data-id");
+		var id = MDB.findClosest(el, "li").getAttribute("data-id");
 
 		var url = "/ws/actor/show/" + id;
 		var http = new XMLHttpRequest();
@@ -35,7 +53,7 @@ MDB.listActors = (function() {
 		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
 		http.onreadystatechange = function() {//Call a function when the state changes.
 			if(http.readyState == 4 && http.status == 200) {
-				alert("Ator excluído com sucesso");
+				alert("Actor successfully deleted");
 				MDB.socket.emit('refresh actors', 'catálogo atualizado');
 			}
 		}
@@ -50,7 +68,6 @@ MDB.listActors = (function() {
 
 			deleteButton.addEventListener("click", function(){
 				var el = this;
-				console.log(el);
 				deleteThisActor(el);
 			});
 		}
@@ -70,7 +87,8 @@ MDB.listActors = (function() {
 			getActorsList();
 			bindEvents();
 		},
-		deleteActors: deleteActors
+		deleteActors: deleteActors,
+		renderActor: renderActor
 	}
 })();
 

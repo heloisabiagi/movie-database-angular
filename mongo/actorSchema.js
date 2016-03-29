@@ -5,7 +5,8 @@ module.exports = function(app) {
 	var actorSchema = new Mongoose.Schema({
 	  name: { type: String },
 	  dateOfBirth: { type: Date },
-	  placeOfBirth: { type: String }
+	  placeOfBirth: { type: String },
+	  shortBio: { type: String }
 	});
 
 	var Actor = Mongoose.model('Actor', actorSchema);

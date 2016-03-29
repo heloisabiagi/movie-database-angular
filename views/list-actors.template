@@ -1,0 +1,34 @@
+{>layout /}
+
+{<title}{pageTitle}{/title}
+
+{<main}
+	<div class="row content-row">
+		<div class="col-md-12">
+			<form id="search-form">
+				<div class="input-group">
+                    <input type="text" id="search-box" name="searchBox" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                      <input type="submit" id="search-button" name="searchButton" class="btn btn-default"  value="Search" />
+                    </span>
+                 </div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">		
+			<h1>Starring</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<ul id="actors-list" class="media-list">
+			</ul>
+		</div>
+	</div>
+{/main}	
+
+{<scripts}
+	<script src="/javascripts/listActors.js"></script>
+	<script src="/javascripts/searchActors.js"></script>
+{/scripts}	

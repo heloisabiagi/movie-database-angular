@@ -2,16 +2,16 @@ var express = require('express');
 var router = express.Router();
 
 
-router.get('/ator/cadastrar', function(req, res) {
-  res.render('cadastrar-ator', { pageTitle: "Cadastrar Ator"});
+router.get('/actor/add', function(req, res) {
+  res.render('add-actor', { pageTitle: "Movie Database - Add Actor"});
 });
 
-router.get('/ator/listar', function(req, res) {
-  	res.render('listar-atores', { pageTitle: "Listar Atores"});
+router.get('/actor/list', function(req, res) {
+  	res.render('list-actors', { pageTitle: "Movie Database - List Actors"});
 });
 
-router.get('/ator/:id', function(req, res) {
-  	res.render('detalhe-ator', { pageTitle: "Ver Ator"});
+router.get('/actor/:id', function(req, res) {
+  	res.render('show-actor', { pageTitle: "Movie Database - Actor Info"});
 });
 
 

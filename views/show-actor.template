@@ -1,0 +1,26 @@
+{>layout /}
+
+{<title}{pageTitle}{/title}
+
+{<main}
+	<div class="row item-details">
+		<div class="col-md-3">
+			<div class="actor-poster"></div>
+		</div>
+		<div class="col-md-7">
+			<dl id="show-actor" class="details-list">
+			</dl>
+
+			<div class="form-buttons">
+				<button class="edit-actor btn btn-primary"> Edit </button>	
+			</div>
+		</div>
+	</div>
+{/main}	
+
+{<scripts}
+	{!}
+	<script src="/javascripts/listActors.js"></script>
+	{!}
+	<script src="/javascripts/showActor.js"></script>
+{/scripts}	
