@@ -87,7 +87,7 @@ MDB.showFilm = (function() {
 
 		film._id = filmId;
 		film.title = list.querySelector("#edit-title").value;
-		film.rating = list.querySelector("#rating").textContent;
+		film.rating = list.querySelector("#edit-rating").value;
 		film.releaseYear = parseInt(list.querySelector("#edit-releaseYear").value);
 		film.synopsis = list.querySelector("#edit-synopsis").value;
 		film.hasCreditCookie = false;
