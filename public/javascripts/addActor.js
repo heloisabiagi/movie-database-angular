@@ -5,7 +5,6 @@ MDB.addActor = (function() {
 
 		var formattedDate = form.querySelector("#dateOfBirth").value.replace("-", ",");
 
-
 		actor.name = form.querySelector("#name").value;
 		actor.dateOfBirth = new Date(formattedDate);
 		actor.placeOfBirth = form.querySelector("#placeOfBirth").value;
@@ -17,8 +16,8 @@ MDB.addActor = (function() {
 		
 		var http = new XMLHttpRequest();
 		http.open("POST", url, true);
-		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
-		http.onreadystatechange = function() {//Call a function when the state changes.
+		http.setRequestHeader("Content-type", "application/json");
+		http.onreadystatechange = function() {
 			if(http.readyState == 4 && http.status == 200) {
 				alert("Actor added successfully!");
 				MDB.socket.emit('refresh actors', 'catálogo atualizado');

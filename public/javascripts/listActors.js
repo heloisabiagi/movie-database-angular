@@ -5,8 +5,8 @@ MDB.listActors = (function() {
 		var url = "/ws/actor";
 		var http = new XMLHttpRequest();
 		http.open("GET", url, true);
-		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
-		http.onreadystatechange = function() {//Call a function when the state changes.
+		http.setRequestHeader("Content-type", "application/json"); 
+		http.onreadystatechange = function() {
 			if(http.readyState == 4 && http.status == 200) {
 				var data = JSON.parse(http.responseText);
 
@@ -15,9 +15,7 @@ MDB.listActors = (function() {
 					var item = data[i];
 					if(item["name"]) {
 						var getActor = renderActor(item);
-						actorsList += "<li data-id='" + item["_id"]+ "'>" + getActor + "</li>";
-						// actorsList += "<li data-id='" + item["_id"]+ "'><a href='/actor/" + item["_id"] +"'><strong>" + item["name"]+ "</strong></a> - " + item["placeOfBirth"]+" <span class='delete-span delete-actor'>Delete</span> </li>";
-					}
+						actorsList += "<li data-id='" + item["_id"]+ "'>" + getActor + "</li>";					}
 				}
 
 				document.getElementById("actors-list").innerHTML = actorsList;
@@ -50,8 +48,8 @@ MDB.listActors = (function() {
 		var url = "/ws/actor/show/" + id;
 		var http = new XMLHttpRequest();
 		http.open("DELETE", url, true);
-		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
-		http.onreadystatechange = function() {//Call a function when the state changes.
+		http.setRequestHeader("Content-type", "application/json");
+		http.onreadystatechange = function() {
 			if(http.readyState == 4 && http.status == 200) {
 				alert("Actor successfully deleted");
 				MDB.socket.emit('refresh actors', 'catálogo atualizado');

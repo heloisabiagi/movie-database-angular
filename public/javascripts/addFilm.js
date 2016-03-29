@@ -15,10 +15,8 @@ MDB.addFilm = (function() {
 		var url = "/ws/film";
 		var http = new XMLHttpRequest();
 		http.open("POST", url, true);
-
-		//Send the proper header information along with the request
 		http.setRequestHeader("Content-type", "application/json");
-		http.onreadystatechange = function() {//Call a function when the state changes.
+		http.onreadystatechange = function() {
 			if(http.readyState == 4 && http.status == 200) {
 				alert("Movie added successfully!");
 				MDB.socket.emit('refresh list', 'catálogo atualizado');

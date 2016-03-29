@@ -5,8 +5,8 @@ MDB.listFilms = (function() {
 		var url = "/ws/film";
 		var http = new XMLHttpRequest();
 		http.open("GET", url, true);
-		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
-		http.onreadystatechange = function() {//Call a function when the state changes.
+		http.setRequestHeader("Content-type", "application/json");
+		http.onreadystatechange = function() {
 			if(http.readyState == 4 && http.status == 200) {
 				var data = JSON.parse(http.responseText);
 
@@ -48,8 +48,8 @@ MDB.listFilms = (function() {
 		var url = "/ws/film/show/" + id;
 		var http = new XMLHttpRequest();
 		http.open("DELETE", url, true);
-		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
-		http.onreadystatechange = function() {//Call a function when the state changes.
+		http.setRequestHeader("Content-type", "application/json");
+		http.onreadystatechange = function() {
 			if(http.readyState == 4 && http.status == 200) {
 				alert("Movie successfully deleted");
 				MDB.socket.emit('refresh list', 'catálogo atualizado');

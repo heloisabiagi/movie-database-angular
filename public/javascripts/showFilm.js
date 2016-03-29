@@ -7,8 +7,8 @@ MDB.showFilm = (function() {
 		var url = "/ws/film/show/" + filmId;
 		var http = new XMLHttpRequest();
 		http.open("GET", url, true);
-		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
-		http.onreadystatechange = function() {//Call a function when the state changes.
+		http.setRequestHeader("Content-type", "application/json");
+		http.onreadystatechange = function() {
 			if(http.readyState == 4 && http.status == 200) {
 				var data = JSON.parse(http.responseText);
 				populateFilmData(data, update);
@@ -23,7 +23,7 @@ MDB.showFilm = (function() {
 		filmInfo += "<dt class='hidden'>Title:</dt>";
 		filmInfo += "<dd class='data' data-type='text' id='title'>" + data.title + "</dd>";
 		filmInfo += "<dt>Parental Guide:</dt>";
-		filmInfo += "<dd id='rating'>" + data.rating + "</dd>";
+		filmInfo += "<dd class='data' data-type='select' id='rating'>" + data.rating + "</dd>";
 		filmInfo += "<dt>Release Year:</dt>";
 		filmInfo += "<dd class='data' data-type='number' id='releaseYear'>" + data.releaseYear + "</dd>";
 		filmInfo += "<dt>Synopsis</dt>";
@@ -58,7 +58,15 @@ MDB.showFilm = (function() {
 			case el.getAttribute("data-type") == "textarea":
 				editInput = "<textarea class='form-control' id='edit-" + el.getAttribute("id") + "'>" +el.textContent +"</textarea>";
 			break;
-
+			case el.getAttribute("data-type") == "select":
+				if(el.getAttribute("id") == "rating"){
+					editInput = '<select name="rating" id="edit-rating" class="form-control">'
+					editInput += '<option value="free">Free</option>';
+					editInput += '<option value="PG-13">PG-13</option>';
+					editInput += '<option value="PG-17">PG-17</option>';
+					editInput += '</select>';
+				}
+			break;
 			default:
 				editInput = "<input class='form-control' type='text' id='edit-" + el.getAttribute("id") + "' value='" + el.textContent +"' />";
 			}
@@ -89,8 +97,8 @@ MDB.showFilm = (function() {
 		var url = "/ws/film/show/" + filmId;
 		var http = new XMLHttpRequest();
 		http.open("PUT", url, true);
-		http.setRequestHeader("Content-type", "application/json"); //Send the proper header information along with the request
-		http.onreadystatechange = function() {//Call a function when the state changes.
+		http.setRequestHeader("Content-type", "application/json");
+		http.onreadystatechange = function() {
 			if(http.readyState == 4 && http.status == 200) {
 				var data = JSON.parse(http.responseText);
 				alert("Data uploaded successfully!");
