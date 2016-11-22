@@ -73,9 +73,3 @@ MDB.AddComponent.prototype.bindEvents = function(){
 		console.log(msg);
   	});
 }
-
-MDB.addFilm = new MDB.AddComponent("film");
-MDB.addFilm.bindEvents();
-
-MDB.addFilm = new MDB.AddComponent("actor");
-MDB.addFilm.bindEvents();

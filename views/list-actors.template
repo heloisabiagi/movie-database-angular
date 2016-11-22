@@ -22,13 +22,22 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<ul id="actors-list" class="media-list">
+			<ul id="actor-list" class="media-list">
 			</ul>
 		</div>
 	</div>
 {/main}	
 
 {<scripts}
-	<script src="/javascripts/listActors.js"></script>
-	<script src="/javascripts/searchActors.js"></script>
+	<script src="/javascripts/listComponent.js"></script>
+	<script type="text/javascript">
+		MDB.actorsList = new MDB.ListComponent("actor");
+		MDB.actorsList.startList();
+	</script>
+
+	<script src="/javascripts/searchComponent.js"></script>
+	<script type="text/javascript">
+		MDB.searchActors = new MDB.SearchComponent("actor");
+		MDB.searchActors.bindEvents();
+	</script>
 {/scripts}	

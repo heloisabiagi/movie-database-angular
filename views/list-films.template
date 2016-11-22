@@ -29,6 +29,15 @@
 {/main}	
 
 {<scripts}
-	<script src="/javascripts/listFilms.js"></script>
-	<script src="/javascripts/searchFilm.js"></script>
+	<script src="/javascripts/listComponent.js"></script>
+	<script type="text/javascript">
+		MDB.filmsList = new MDB.ListComponent("film");
+		MDB.filmsList.startList();
+	</script>
+	<script src="/javascripts/searchComponent.js"></script>
+	<script type="text/javascript">
+		MDB.searchFilms = new MDB.SearchComponent("film");
+		MDB.searchFilms.bindEvents();
+	</script>
+
 {/scripts}	

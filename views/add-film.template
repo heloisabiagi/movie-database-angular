@@ -58,4 +58,8 @@
 
 {<scripts}
 	<script src="/javascripts/addComponent.js"></script>
+	<script type="text/javascript">
+		MDB.addFilm = new MDB.AddComponent("film");
+		MDB.addFilm.bindEvents();
+	</script>
 {/scripts}	

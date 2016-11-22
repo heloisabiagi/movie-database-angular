@@ -55,4 +55,8 @@
 
 {<scripts}
 	<script src="/javascripts/addComponent.js"></script>
+	<script type="text/javascript">
+		MDB.addActor = new MDB.AddComponent("actor");
+		MDB.addActor.bindEvents();
+	</script>
 {/scripts}	

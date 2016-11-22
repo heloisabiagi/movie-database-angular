@@ -19,8 +19,5 @@
 {/main}	
 
 {<scripts}
-	{!}
-	<script src="/javascripts/listActors.js"></script>
-	{!}
 	<script src="/javascripts/showActor.js"></script>
 {/scripts}	
