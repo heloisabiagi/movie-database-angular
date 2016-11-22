@@ -5,13 +5,13 @@
 {<main}
 	<div class="row">
 		<div class="col-md-12">
-			<h1>Add Movie</h1>
+			<h1>Add Film</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="well">
-				<form class="form-horizontal" id="movie-form">
+				<form class="form-horizontal" id="film-form">
 					<div class="form-group">
 						<label for="title" class="col-lg-2 control-label">Title:</label> 
 						<div class="col-lg-10">
@@ -57,5 +57,5 @@
 {/main}	
 
 {<scripts}
-	<script src="/javascripts/addFilm.js"></script>
+	<script src="/javascripts/addComponent.js"></script>
 {/scripts}	

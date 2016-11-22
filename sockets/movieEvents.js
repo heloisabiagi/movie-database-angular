@@ -7,12 +7,12 @@ module.exports = function(app) {
 	io.on('connection', function(socket){
 	  console.log('a user connected');
 
-	  socket.on('refresh list', function(msg){
-	    io.emit('refresh list', msg);
+	  socket.on('refresh film', function(msg){
+	    io.emit('refresh film', msg);
 	  });
 
-	  socket.on('refresh actors', function(msg){
-	    io.emit('refresh actors', msg);
+	  socket.on('refresh actor', function(msg){
+	    io.emit('refresh actor', msg);
 	  });
 
 	});

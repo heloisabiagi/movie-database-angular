@@ -52,7 +52,7 @@ MDB.listFilms = (function() {
 		http.onreadystatechange = function() {
 			if(http.readyState == 4 && http.status == 200) {
 				alert("Movie successfully deleted");
-				MDB.socket.emit('refresh list', 'catálogo atualizado');
+				MDB.socket.emit('refresh film', 'updated data');
 			}
 		}
 		http.send();
@@ -72,7 +72,7 @@ MDB.listFilms = (function() {
 	}
 
 	function bindEvents(){
-		MDB.socket.on('refresh list', function(msg){
+		MDB.socket.on('refresh film', function(msg){
 				getFilmsList();
   		});
 

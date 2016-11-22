@@ -52,7 +52,7 @@ MDB.listActors = (function() {
 		http.onreadystatechange = function() {
 			if(http.readyState == 4 && http.status == 200) {
 				alert("Actor successfully deleted");
-				MDB.socket.emit('refresh actors', 'catálogo atualizado');
+				MDB.socket.emit('refresh actor', 'catálogo atualizado');
 			}
 		}
 		http.send();
@@ -72,7 +72,7 @@ MDB.listActors = (function() {
 	}
 
 	function bindEvents(){
-		MDB.socket.on('refresh actors', function(msg){
+		MDB.socket.on('refresh actor', function(msg){
 				getActorsList();
   		});
 

@@ -54,5 +54,5 @@
 {/main}	
 
 {<scripts}
-	<script src="/javascripts/addActor.js"></script>
+	<script src="/javascripts/addComponent.js"></script>
 {/scripts}	
