@@ -1,4 +1,4 @@
-# Movie Database
+# Movie Database - Angular version
 This is a small application using **Node.js**, **Express** and **MongoDB**, as well as some experience with **Socket.io**. The application is a movie datadabase that stores information from movies and movie stars. In this current version, you can see a list of movies, see the movie details, edit and update the movie details, delete a movie from the list and search through movies. The same for the actors and actresses.
 
 ## Running the app ##
