@@ -20,7 +20,6 @@ var mongodb = require("./mongo/mongo.js")(app);
 
 // Sockets
 app.set("port", 3000);
-var movieEvents = require('./sockets/MovieEvents.js')(app);
 
 
 // uncomment after placing your favicon in /public
@@ -37,16 +36,10 @@ var ws_actors = require('./controllers/ActorController.js')(app);
 
 // RENDER ROUTES
 var home = require('./routes/home');
-var movies = require('./routes/films');
-var actors = require('./routes/actors');
+
 
 // ROUTES
 app.use('/', home);
-app.use('/', movies);
-app.use('/', actors);
-
-//app.use('/', ws_movies);
-//app.use('/', ws_actors);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

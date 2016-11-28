@@ -1,0 +1,32 @@
+<div class="row item-details" ng-controller="showFilm">
+	<div class="col-md-3">
+		<div class="actor-poster">
+			<img ng-src="{{item.imageUrl}}" alt="{{item.title}}" />
+		</div>
+	</div>
+	<div class="col-md-7">
+		<dl id="show-actor" class="details-list">
+			<dt class='hidden'>{{ item.title }}</dt>
+			<dd class='data' data-type='text' id='name' ng-hide="editItem">{{ item.title }}</dd>
+			<dd class='data' id='title' ng-show="editItem"><input type="text" name="title" ng-model="item.title" /></dd>
+			<dt>Rating:</dt>
+			<dd class='data' id='rating' ng-hide="editItem">{{ item.rating }}</dd>
+			<dd class='data' id='rating' ng-show="editItem">
+				<select name="rating" id="rating" class="form-control" ng-model="item.rating" ng-options="item for item in ratingOptions">
+				</select>
+			</dd>
+			<dt>Release Year:</dt>
+			<dd class='data' data-type='text' id='releaseYear' ng-hide="editItem">{{ item.releaseYear }}</dd>
+			<dd class='data' data-type='text' id='releaseYear' ng-show="editItem"><input type="text" name="releaseYear" ng-model="item.releaseYear" /></dd>
+			<dt>Synopsis</dt>
+			<dd class='data' data-type='textarea' id='synopsis' ng-hide="editItem">{{ item.synopsis }}</dd>
+			<dd class='data' data-type='textarea' id='synopsis' ng-show="editItem"><textarea cols="100" rows="5" name="synopsis" ng-model="item.synopsis"></textarea></dd>
+		</dl>
+
+		<div class="form-buttons">
+			<button class="edit-actor btn btn-primary" ng-click="editFilm()" ng-hide="editItem"> Edit </button>
+			<button class="edit-actor btn btn-primary" ng-click="cancelEdit()" ng-show="editItem"> Cancel </button>
+			<button class="edit-actor btn btn-primary" ng-click="updateFilm()" ng-show="editItem"> Update </button>	
+		</div>
+	</div>
+</div>

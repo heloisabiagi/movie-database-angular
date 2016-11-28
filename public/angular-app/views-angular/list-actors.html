@@ -1,0 +1,42 @@
+<div class="row content-row">
+	<div class="col-md-12">	
+		<form id="search-form" ng-controller="searchController">
+			<div class="input-group">
+                <input type="text" id="search-box" name="searchBox" class="form-control" placeholder="Search..." ng-model="searchField">
+                <span class="input-group-btn">
+                  <input type="submit" id="search-button" name="searchButton" class="btn btn-default"  value="Search" ng-click="doSearch()" />
+                </span>
+             </div>
+		</form>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">		
+		<h1>Starring</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+			
+		<ul id="film-list" class="media-list" ng-controller="listActors">
+			<li ng-repeat="item in items">
+				<div class="media">
+		  			<a class="media-left" ng-href="/#actor/{{ item['_id'] }}">
+		  				<img class="media-object" ng-src="/images/{{ item['name'] | machineName }}.jpg" alt="{{ item['name'] }}">
+		  			</a>
+		  			<div class="media-body">
+		  				<h3 class="media-heading">
+		 					 <a ng-href="/actor/{{ item['_id'] }}"> {{ item['name']}}</a> 
+		 					 <span class="delete-span delete-film" ng-click="deleteItem(item['_id']);">Delete</span>
+		 				</h3>
+		 				<p><small>{{ item['placeOfBirth'] }}</small></p>
+		 				<p>{{ item['shortBio'] }}</p>
+		 			</div>
+		 		</div>
+	 		</li>
+
+		</ul>
+	
+	</div>
+</div>

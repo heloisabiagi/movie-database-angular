@@ -1,0 +1,47 @@
+<div class="row">
+	<div class="col-md-12">
+		<h1>Add Actor</h1>
+	</div>
+</div>
+<div class="row" ng-controller="addActor">
+	<div class="col-md-12">
+		<div class="well">
+			<form id="actor-form" class="form-horizontal" ng-submit="addActor()">
+				<div class="form-group">
+					<label for="name" class="col-lg-2 control-label">Name:</label>
+					<div class="col-lg-10">
+						<input type="text" name="name" id="name" class="form-control" ng-model="formData.name" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="dateOfBirth" class="col-lg-2 control-label">Date of birth:</label>
+					<div class="col-lg-10">
+						<input type="date" name="dateOfBirth" id="dateOfBirth" class="form-control" ng-model="formData.dateOfBirth" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label for="placeOfBirth" class="col-lg-2 control-label">Place of Birth:</label>
+					<div class="col-lg-10">
+						<input type="text" name="placeOfBirth" id="placeOfBirth" class="form-control" ng-model="formData.placeOfBirth" />
+					</div> 
+				</div>
+
+				<div class="form-group">
+					<label for="shortBio" class="col-lg-2 control-label">Bio:</label>
+					<div class="col-lg-10">
+						<textarea name="shortBio" id="shortBio" class="form-control" ng-model="formData.shortBio"></textarea>
+					</div> 
+				</div>
+
+				<div class="form-group">
+					<div class="col-lg-10 col-lg-offset-2">
+						<input type="submit" value="Add" class="btn btn-primary" />	
+					</div>
+				</div>	
+			</form>
+		</div>
+	</div>
+</div>

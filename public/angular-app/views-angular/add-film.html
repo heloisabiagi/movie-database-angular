@@ -1,0 +1,47 @@
+<div class="row">
+		<div class="col-md-12">
+			<h1>Add Film</h1>
+		</div>
+	</div>
+	<div class="row" ng-controller="addFilm">
+		<div class="col-md-12">
+			<div class="well">
+				<form class="form-horizontal" id="film-form" ng-submit="addFilm()">
+					<div class="form-group">
+						<label for="title" class="col-lg-2 control-label">Title:</label> 
+						<div class="col-lg-10">
+							<input type="text" name="title" id="title" class="form-control" ng-model="formData.title" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="rating" class="col-lg-2 control-label">Parental Guides:</label> 
+						<div class="col-lg-10">
+							<select name="rating" id="rating" class="form-control" ng-model="formData.rating" ng-options="item for item in ratingOptions">
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="releaseYear" class="col-lg-2 control-label">Release Year:</label>
+						<div class="col-lg-10">
+							<input type="number" name="releaseYear" id="releaseYear" class="form-control" ng-model="formData.releaseYear" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="releaseYear" class="col-lg-2 control-label">Synopsis:</label>
+						<div class="col-lg-10">
+							<textarea name="synopsis" id="synopsis" class="form-control" ng-model="formData.synopsis"></textarea>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-lg-10 col-lg-offset-2">
+							<input type="submit" value="Add" class="btn btn-primary" />	
+						</div>
+					</div>	
+				</form>
+			</div>
+		</div>
+	</div>

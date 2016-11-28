@@ -1,0 +1,30 @@
+<div class="row item-details" ng-controller="showActor">
+	<div class="col-md-3">
+		<div class="actor-poster">
+			<img ng-src="{{item.imageUrl}}" alt="{{item.name}}" />
+		</div>
+	</div>
+	<div class="col-md-7">
+		<dl id="show-actor" class="details-list">
+			<dt class='hidden'>{{ item.name }}</dt>
+			<dd class='data' data-type='text' id='name' ng-hide="editItem">{{ item.name }}</dd>
+			<dd class='data' id='name' ng-show="editItem"><input type="text" name="name" ng-model="item.name" /></dd>
+			<dt>Date of birth:</dt>
+			<dd class='data' data-type='date' id='birthday' ng-hide="editItem">{{ item.dateOfBirth | displayDate }}</dd>
+			<dd class='data' data-type='date' id='birthday' ng-show="editItem"><input type="date" name="dateOfBirth" value="{{ item.dateOfBirth | date:'yyyy-MM-dd' }}" ng-model="item.objectDateOfBirth"/>
+			</dd>
+			<dt>Place of Birth:</dt>
+			<dd class='data' data-type='text' id='placeOfBirth' ng-hide="editItem">{{ item.placeOfBirth }}</dd>
+			<dd class='data' data-type='text' id='placeOfBirth' ng-show="editItem"><input type="text" name="placeOfBirth" ng-model="item.placeOfBirth" /></dd>
+			<dt>Bio</dt>
+			<dd class='data' data-type='textarea' id='shortBio' ng-hide="editItem">{{ item.shortBio }}</dd>
+			<dd class='data' data-type='textarea' id='shortBio' ng-show="editItem"><textarea cols="100" rows="5" name="shortBio" ng-model="item.shortBio"></textarea></dd>
+		</dl>
+
+		<div class="form-buttons">
+			<button class="edit-actor btn btn-primary" ng-click="editActor()" ng-hide="editItem"> Edit </button>
+			<button class="edit-actor btn btn-primary" ng-click="cancelEdit()" ng-show="editItem"> Cancel </button>
+			<button class="edit-actor btn btn-primary" ng-click="updateActor()" ng-show="editItem"> Update </button>	
+		</div>
+	</div>
+</div>

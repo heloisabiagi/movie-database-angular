@@ -26,8 +26,7 @@ module.exports = function(app) {
     },
 
     put: function(req, res, next) {
-      application.update(req.body._id, req.body, function(err, result) {
-
+      application.update(req.params.id, req.body, function(err, result) {
         if(err) return res.json(500, err);
         res.json(result || {});
       });
@@ -56,12 +55,12 @@ module.exports = function(app) {
   .get(routes.get)
   .post(routes.post);
 
-  app.route('/ws/actor/show/:id')
+  app.route('/ws/actor/:id')
   .put(routes.put)
   .get(routes.get)
   .delete(routes.delete);
 
-  app.route('/ws/actor/search')
+  app.route('/ws/search/actor')
   .get(routes.search);
 
   return routes;

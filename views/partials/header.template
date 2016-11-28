@@ -13,10 +13,10 @@
             </div> <!-- /navbar-header -->
             <div class="collapse navbar-collapse" id="main-nav">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/film/list">Films</a></li>
-                    <li><a href="/actor/list">Actors</a></li>
-                    <li><a href="/film/add">Add Film</a></li>
-                    <li><a href="/actor/add">Add Actor</a></li>
+                    <li><a href="/list/film">Films</a></li>
+                    <li><a href="/list/actor">Actors</a></li>
+                    <li><a href="/add/film">Add Film</a></li>
+                    <li><a href="/add/actor">Add Actor</a></li>
                 </ul>
             </div> <!-- /navbar-collapse -->
         </div> <!-- /container -->
