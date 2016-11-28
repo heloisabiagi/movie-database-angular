@@ -6,17 +6,30 @@ module.exports = function(grunt) {
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
      concat: {
+      vendors: {
+        src:  ["public/angular-app/app/angular.min.js", 
+        "public/angular-app/app/angular-route.min.js", 
+        "public/angular-app/app/angular-resource.min.js"],
+        dest: "public/build/js/vendors.js"
+      },
       scripts: {
-        src:  ["public/javascripts/*.js"],
-        dest: "public/build/js/assets.js"
+        src:  ["public/angular-app/scripts/generalSettings.js",
+        "public/angular-app/scripts/filmSettings.js",
+        "public/angular-app/scripts/actorSettings.js",
+        "public/angular-app/scripts/searchSettings.js"],
+        dest: "public/build/js/angularApp.js"
         }      	
     },
   	 uglify: {
+      vendors: {
+        src: "<%= concat.vendors.dest %>",
+        dest: "public/build/js/vendors.min.js"
+        }
+      },
       scripts: {
         src: "<%= concat.scripts.dest %>",
-        dest: "public/build/js/assets.min.js"
+        dest: "public/build/js/scripts.min.js"
         }
-      }
   });
 
   // Carrega plugins

@@ -39,13 +39,7 @@
   var MDB = MDB || {};
 </script>
 <script src="/javascripts/helpers.js"></script>
-<script src="/angular-app/app/angular.min.js"></script>
-<script src="/angular-app/app/angular-route.min.js"></script>
-<script src="/angular-app/app/angular-resource.min.js"></script>
-<script src="/angular-app/scripts/generalSettings.js"></script>
-<script src="/angular-app/scripts/filmSettings.js"></script>
-<script src="/angular-app/scripts/actorSettings.js"></script>
-<script src="/angular-app/scripts/searchSettings.js"></script>
-
+<script src="/build/js/vendors.js"></script>
+<script src="/build/js/angularApp.js"></script>
 </body>
 </html>    
