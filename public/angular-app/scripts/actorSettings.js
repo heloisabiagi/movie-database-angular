@@ -10,13 +10,13 @@ app.factory('Actor', function($resource) {
 
 /* Controllers */
 
-app.controller('mainListActors', function($scope, $http, $routeParams) {
+app.controller('mainListActors', ['$scope','$routeParams', function($scope, $routeParams) {
     $scope.broadCaster = function(evt, msg){
         $scope.$broadcast(evt, msg);
     }
-});
+}]);
 
-app.controller('listActors', function($scope, $http, $routeParams, Actor, Search) {
+app.controller('listActors', ['$scope','$routeParams', 'Actor', 'Search', function($scope, $routeParams, Actor, Search) {
 
    // Get entries
    var actors = Actor.query(function(){
@@ -43,9 +43,9 @@ app.controller('listActors', function($scope, $http, $routeParams, Actor, Search
         searchService(data);
     });
 
-});
+}]);
 
-app.controller('addActor', function($scope, $http, $routeParams, Actor) {
+app.controller('addActor', ['$scope', '$routeParams', 'Actor', function($scope, $routeParams, Actor) {
 
   $scope.addActor = function(){
     formData = $scope.formData;
@@ -54,9 +54,9 @@ app.controller('addActor', function($scope, $http, $routeParams, Actor) {
     alert("New actor added successfully");
   } 
 
-});
+}]);
 
-app.controller('showActor', function($scope, $filter, $http, $routeParams, Actor) {
+app.controller('showActor', ['$scope', '$filter', '$routeParams', 'Actor', function($scope, $filter, $routeParams, Actor) {
   var actor = Actor.get({id: $routeParams['id'] }, function(){
       $scope.item = actor;
       $scope.item.objectDateOfBirth = new Date(actor.dateOfBirth);
@@ -81,7 +81,7 @@ app.controller('showActor', function($scope, $filter, $http, $routeParams, Actor
       });
   }
 
-});
+}]);
 
 
 

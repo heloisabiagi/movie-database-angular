@@ -1,14 +1,14 @@
 var app = angular.module('mdbAng', ['ngRoute', 'ngResource']);
 
 /* Filters */
-app.filter('machineName', function () {
+app.filter('machineName', function() {
     return function (input) {
         var machineName = input.toLowerCase().replace(/\s[\:\,\'\-]\s/g, " ").split(" ").join("-"); 
         return machineName;
     }
 });
 
-app.filter('displayDate', function () {
+app.filter('displayDate', function() {
     return function (input) {
         var birthDay = new Date(input); 
         var day = birthDay.getDate();
@@ -28,7 +28,7 @@ app.filter('displayDate', function () {
     }
 });
 
-app.filter('objectDate', function () {
+app.filter('objectDate', function() {
     return function (input) {
         var birthDay = new Date(input); 
         return birthDay;
@@ -62,6 +62,15 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/film/:id', {
         templateUrl:'/angular-app/views-angular/show-film.html'
+      }).
+      when('/add/user', {
+        templateUrl:'/angular-app/views-angular/add-user.html'
+      }).
+      when('/login', {
+        templateUrl:'/angular-app/views-angular/login.html'
+      }).
+      otherwise({
+        templateUrl:'/angular-app/views-angular/404.html'
       });
 
       // Beautiful URLs (no hash)

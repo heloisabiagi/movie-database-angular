@@ -1,14 +1,14 @@
 var app = angular.module('mdbAng', ['ngRoute', 'ngResource']);
 
 /* Filters */
-app.filter('machineName', function () {
+app.filter('machineName', function() {
     return function (input) {
         var machineName = input.toLowerCase().replace(/\s[\:\,\'\-]\s/g, " ").split(" ").join("-"); 
         return machineName;
     }
 });
 
-app.filter('displayDate', function () {
+app.filter('displayDate', function() {
     return function (input) {
         var birthDay = new Date(input); 
         var day = birthDay.getDate();
@@ -28,7 +28,7 @@ app.filter('displayDate', function () {
     }
 });
 
-app.filter('objectDate', function () {
+app.filter('objectDate', function() {
     return function (input) {
         var birthDay = new Date(input); 
         return birthDay;
@@ -62,6 +62,15 @@ app.config(['$routeProvider', '$locationProvider',
       }).
       when('/film/:id', {
         templateUrl:'/angular-app/views-angular/show-film.html'
+      }).
+      when('/add/user', {
+        templateUrl:'/angular-app/views-angular/add-user.html'
+      }).
+      when('/login', {
+        templateUrl:'/angular-app/views-angular/login.html'
+      }).
+      otherwise({
+        templateUrl:'/angular-app/views-angular/404.html'
       });
 
       // Beautiful URLs (no hash)
@@ -85,13 +94,13 @@ app.factory('Film', function($resource) {
 
 
 /* Controllers */
-app.controller('mainListFilms', function($scope, $http, $routeParams) {
+app.controller('mainListFilms', ['$scope', '$routeParams', function($scope, $routeParams) {
     $scope.broadCaster = function(evt, msg){
         $scope.$broadcast(evt, msg);
     }
-});
+}]);
 
-app.controller('listFilms', function($scope, $http, $routeParams, Film, Search) {
+app.controller('listFilms', ['$scope', '$routeParams', 'Film', 'Search' ,function($scope, $routeParams, Film, Search) {
 
   // Get entries
    var films = Film.query(function(){
@@ -118,9 +127,9 @@ app.controller('listFilms', function($scope, $http, $routeParams, Film, Search) 
         searchService(data);
     });
 
-});
+}]);
 
-app.controller('addFilm', function($scope, $http, $routeParams, Film) {
+app.controller('addFilm', ['$scope', '$routeParams', 'Film' ,function($scope, $routeParams, Film) {
   $scope.ratingOptions = ["free", "PG-13", "PG-17"];
 
   $scope.addFilm = function(){
@@ -132,9 +141,9 @@ app.controller('addFilm', function($scope, $http, $routeParams, Film) {
     });
   } 
 
-});
+}]);
 
-app.controller('showFilm', function($scope, $filter, $http, $routeParams, Film) {
+app.controller('showFilm', ['$scope', '$filter', '$routeParams', 'Film', function($scope, $filter, $routeParams, Film) {
   var film = Film.get({id: $routeParams['id'] }, function(){
       $scope.item = film;
       $scope.item.imageUrl = '/images/' + $filter("machineName")(film.title) + '.jpg';
@@ -167,7 +176,7 @@ app.controller('showFilm', function($scope, $filter, $http, $routeParams, Film) 
     
   } 
 
-});
+}]);
 
 
 
@@ -188,13 +197,13 @@ app.factory('Actor', function($resource) {
 
 /* Controllers */
 
-app.controller('mainListActors', function($scope, $http, $routeParams) {
+app.controller('mainListActors', ['$scope','$routeParams', function($scope, $routeParams) {
     $scope.broadCaster = function(evt, msg){
         $scope.$broadcast(evt, msg);
     }
-});
+}]);
 
-app.controller('listActors', function($scope, $http, $routeParams, Actor, Search) {
+app.controller('listActors', ['$scope','$routeParams', 'Actor', 'Search', function($scope, $routeParams, Actor, Search) {
 
    // Get entries
    var actors = Actor.query(function(){
@@ -221,9 +230,9 @@ app.controller('listActors', function($scope, $http, $routeParams, Actor, Search
         searchService(data);
     });
 
-});
+}]);
 
-app.controller('addActor', function($scope, $http, $routeParams, Actor) {
+app.controller('addActor', ['$scope', '$routeParams', 'Actor', function($scope, $routeParams, Actor) {
 
   $scope.addActor = function(){
     formData = $scope.formData;
@@ -232,9 +241,9 @@ app.controller('addActor', function($scope, $http, $routeParams, Actor) {
     alert("New actor added successfully");
   } 
 
-});
+}]);
 
-app.controller('showActor', function($scope, $filter, $http, $routeParams, Actor) {
+app.controller('showActor', ['$scope', '$filter', '$routeParams', 'Actor', function($scope, $filter, $routeParams, Actor) {
   var actor = Actor.get({id: $routeParams['id'] }, function(){
       $scope.item = actor;
       $scope.item.objectDateOfBirth = new Date(actor.dateOfBirth);
@@ -259,7 +268,7 @@ app.controller('showActor', function($scope, $filter, $http, $routeParams, Actor
       });
   }
 
-});
+}]);
 
 
 
@@ -282,6 +291,51 @@ app.controller('searchController', function($scope, $http, $routeParams, Search)
   }
 
 });
+
+
+
+
+
+
+
+/* Resources */
+app.factory('User', function($resource) {
+  return $resource('/ws/user/:id', {
+    update: {
+      method: 'PUT' // this method issues a PUT request
+    }
+  });
+});
+
+app.factory('Login', function($resource) {
+  return $resource('/ws/login', {username: '@username'});
+});
+
+/* Controllers */
+
+app.controller('addUser', ['$scope', '$routeParams', 'User' ,function($scope, $routeParams, User) {
+
+  $scope.addUser = function(){
+    formData = $scope.formData;
+
+    User.save(formData, function() {
+      alert("New user added successfully");
+    });
+  } 
+
+}]);
+
+app.controller('login', ['$scope', '$routeParams', 'Login' ,function($scope, $routeParams, Login) {
+
+  $scope.loginSubmit = function() {
+
+      var result = Login.query({username: $scope.formData.username}, function(){
+          $scope.items = result;
+          alert("Login successful!");
+      });
+  }
+
+}]);
 
 
 

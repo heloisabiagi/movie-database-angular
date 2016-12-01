@@ -9,13 +9,13 @@ app.factory('Film', function($resource) {
 
 
 /* Controllers */
-app.controller('mainListFilms', function($scope, $http, $routeParams) {
+app.controller('mainListFilms', ['$scope', '$routeParams', function($scope, $routeParams) {
     $scope.broadCaster = function(evt, msg){
         $scope.$broadcast(evt, msg);
     }
-});
+}]);
 
-app.controller('listFilms', function($scope, $http, $routeParams, Film, Search) {
+app.controller('listFilms', ['$scope', '$routeParams', 'Film', 'Search' ,function($scope, $routeParams, Film, Search) {
 
   // Get entries
    var films = Film.query(function(){
@@ -42,9 +42,9 @@ app.controller('listFilms', function($scope, $http, $routeParams, Film, Search) 
         searchService(data);
     });
 
-});
+}]);
 
-app.controller('addFilm', function($scope, $http, $routeParams, Film) {
+app.controller('addFilm', ['$scope', '$routeParams', 'Film' ,function($scope, $routeParams, Film) {
   $scope.ratingOptions = ["free", "PG-13", "PG-17"];
 
   $scope.addFilm = function(){
@@ -56,9 +56,9 @@ app.controller('addFilm', function($scope, $http, $routeParams, Film) {
     });
   } 
 
-});
+}]);
 
-app.controller('showFilm', function($scope, $filter, $http, $routeParams, Film) {
+app.controller('showFilm', ['$scope', '$filter', '$routeParams', 'Film', function($scope, $filter, $routeParams, Film) {
   var film = Film.get({id: $routeParams['id'] }, function(){
       $scope.item = film;
       $scope.item.imageUrl = '/images/' + $filter("machineName")(film.title) + '.jpg';
@@ -91,7 +91,7 @@ app.controller('showFilm', function($scope, $filter, $http, $routeParams, Film) 
     
   } 
 
-});
+}]);
 
 
 

@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // WS ROUTES
 var ws_movies = require('./controllers/FilmController.js')(app);
 var ws_actors = require('./controllers/ActorController.js')(app);
+var ws_users = require('./controllers/UserController.js')(app);
 
 // RENDER ROUTES
 var home = require('./routes/home');
