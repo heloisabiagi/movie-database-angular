@@ -15,12 +15,14 @@
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="/list/film">Films</a></li>
                     <li><a href="/list/actor">Actors</a></li>
-                    <li><a href="/add/film">Add Film</a></li>
-                    <li><a href="/add/actor">Add Actor</a></li>
+                    <li><a href="/add/film" ng-show="isLogged">Add Film</a></li>
+                    <li><a href="/add/actor" ng-show="isLogged">Add Actor</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/add/user">Register</a></li>
+                    <li><a href="/add/user" ng-hide="isLogged">Register</a></li>
+                    <li><a href="/login" ng-hide="isLogged">Login</a></li>
+                    <li><a href="/login" ng-show="isLogged">Hello, {{ loggedUser.username }}!</a></li>
                 </ul>
             </div> <!-- /navbar-collapse -->
         </div> <!-- /container -->

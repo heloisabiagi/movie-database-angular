@@ -25,13 +25,19 @@ app.controller('addUser', ['$scope', '$routeParams', 'User' ,function($scope, $r
 
 }]);
 
-app.controller('login', ['$scope', '$routeParams', 'Login' ,function($scope, $routeParams, Login) {
+app.controller('login', ['$rootScope','$scope', '$location', '$routeParams', 'Login' ,function($rootScope, $scope, $location, $routeParams, Login) {
 
   $scope.loginSubmit = function() {
 
-      var result = Login.query({username: $scope.formData.username}, function(){
-          $scope.items = result;
-          alert("Login successful!");
+      var result = Login.query({username: $scope.formData.username, password: $scope.formData.password}, function(){
+          if(result.length > 0) {
+            $rootScope.isLogged = true;
+            $rootScope.loggedUser = result[0];
+            
+            alert("Login successful!"); 
+            $location.path('/');
+          }
+          
       });
   }
 

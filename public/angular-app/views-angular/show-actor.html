@@ -22,7 +22,7 @@
 		</dl>
 
 		<div class="form-buttons">
-			<button class="edit-actor btn btn-primary" ng-click="editActor()" ng-hide="editItem"> Edit </button>
+			<button class="edit-actor btn btn-primary" ng-click="editActor()" ng-hide="!isLogged || editItem"> Edit </button>
 			<button class="edit-actor btn btn-primary" ng-click="cancelEdit()" ng-show="editItem"> Cancel </button>
 			<button class="edit-actor btn btn-primary" ng-click="updateActor()" ng-show="editItem"> Update </button>	
 		</div>

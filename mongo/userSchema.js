@@ -49,12 +49,12 @@ module.exports = function(app) {
 	        callback(err, result || {});
 	      });
 	    },
-	    search : function(username, callback) {
+	    search : function(username, password, callback) {
 	      if(!username) return callback({});
 
-	      User.find({ username: new RegExp(username, "gi") })
+	      User.find({ username: username, password: password })
 	      .exec(function (err, result) {
-	        callback(err, result || []);
+	        	callback(err, result || []);
 	      });
 	  	  
 	    }

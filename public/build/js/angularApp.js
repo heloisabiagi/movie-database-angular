@@ -52,9 +52,23 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'mainListActors'
       }).
       when('/add/film', {
+        resolve: {
+          'check': function($rootScope, $location){
+              if(!$rootScope.isLogged) {
+                  $location.path('/');
+              }
+          }
+        },
         templateUrl:'/angular-app/views-angular/add-film.html'
       }).
       when('/add/actor', {
+        resolve: {
+          'check': function($rootScope, $location){
+              if(!$rootScope.isLogged) {
+                  $location.path('/');
+              }
+          }
+        },
         templateUrl:'/angular-app/views-angular/add-actor.html'
       }).
       when('/actor/:id', {
@@ -325,13 +339,19 @@ app.controller('addUser', ['$scope', '$routeParams', 'User' ,function($scope, $r
 
 }]);
 
-app.controller('login', ['$scope', '$routeParams', 'Login' ,function($scope, $routeParams, Login) {
+app.controller('login', ['$rootScope','$scope', '$location', '$routeParams', 'Login' ,function($rootScope, $scope, $location, $routeParams, Login) {
 
   $scope.loginSubmit = function() {
 
-      var result = Login.query({username: $scope.formData.username}, function(){
-          $scope.items = result;
-          alert("Login successful!");
+      var result = Login.query({username: $scope.formData.username, password: $scope.formData.password}, function(){
+          if(result.length > 0) {
+            $rootScope.isLogged = true;
+            $rootScope.loggedUser = result[0];
+            
+            alert("Login successful!"); 
+            $location.path('/');
+          }
+          
       });
   }
 

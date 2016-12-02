@@ -52,9 +52,23 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'mainListActors'
       }).
       when('/add/film', {
+        resolve: {
+          'check': function($rootScope, $location){
+              if(!$rootScope.isLogged) {
+                  $location.path('/');
+              }
+          }
+        },
         templateUrl:'/angular-app/views-angular/add-film.html'
       }).
       when('/add/actor', {
+        resolve: {
+          'check': function($rootScope, $location){
+              if(!$rootScope.isLogged) {
+                  $location.path('/');
+              }
+          }
+        },
         templateUrl:'/angular-app/views-angular/add-actor.html'
       }).
       when('/actor/:id', {

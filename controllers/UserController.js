@@ -41,8 +41,9 @@ module.exports = function(app) {
 
     search: function(req, res, next) {
       var username = req.query.username;
+      var password = req.query.password;
 
-      application.search(username, function(err, result) {
+      application.search(username, password, function(err, result) {
         if(err) return res.json(500, err);
         res.json(result || {});
       });
